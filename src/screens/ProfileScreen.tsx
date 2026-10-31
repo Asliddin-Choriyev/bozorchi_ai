@@ -45,7 +45,7 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
           <div>
             <div className="inline-flex items-center gap-1 text-[10px] font-bold text-[#167E51] bg-[#EBF7F0] px-2 py-0.5 rounded-full border border-[#167E51]/20">
               <ShieldCheck className="w-3 h-3 text-[#167E51]" />
-              <span>Tasdiqlangan baqqol</span>
+              <span>{t.profile.verifiedShopBadge}</span>
             </div>
             <h2 className="font-serif font-bold text-lg text-ink leading-tight mt-1">
               {currentShopName}
@@ -73,30 +73,30 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
         <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
           <div className="flex items-center gap-2 text-ink-muted text-xs font-semibold">
             <Coins className="w-4 h-4 text-gold-highlight" />
-            <span>BozorCoins</span>
+            <span>{t.profile.bozorCoins}</span>
           </div>
           <div className="text-xl font-serif font-bold text-ink mt-1">
             {formatUZS(MOCK_USER_PROFILE.bozorCoins, false)}
           </div>
-          <p className="text-[10px] text-[#8C7D68] mt-0.5">Fakturalar uchun mukofot</p>
+          <p className="text-[10px] text-[#8C7D68] mt-0.5">{t.profile.coinsReward}</p>
         </div>
 
         <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
           <div className="flex items-center gap-2 text-ink-muted text-xs font-semibold">
             <Award className="w-4 h-4 text-teal-action" />
-            <span>Jami tejamkorlik</span>
+            <span>{t.profile.totalSavings}</span>
           </div>
           <div className="text-xl font-serif font-bold text-teal-action mt-1">
             {formatUZS(MOCK_USER_PROFILE.totalSavedUZS)}
           </div>
-          <p className="text-[10px] text-[#8C7D68] mt-0.5">{MOCK_USER_PROFILE.joinedPoolsCount} ta guruh xaridida</p>
+          <p className="text-[10px] text-[#8C7D68] mt-0.5">{MOCK_USER_PROFILE.joinedPoolsCount} {t.profile.poolsCountSuffix}</p>
         </div>
       </div>
 
       {/* Language Preference Card */}
       <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-sm text-ink mb-2">
-          Ilova tili / Язык приложения
+          {t.profile.appLanguage}
         </h3>
         <div className="grid grid-cols-3 gap-2">
           {(['uz', 'ru', 'en'] as Language[]).map((l) => (
@@ -122,7 +122,7 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
       {onSwitchRole && (
         <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
           <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider mb-2">
-            Rolni o'zgartirish:
+            {t.roleSelection.switchRoleCardTitle}
           </h3>
           <button
             onClick={() => {
@@ -131,7 +131,7 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
             }}
             className="w-full min-h-[44px] bg-[#0A1714] hover:bg-black text-gold-highlight font-bold text-xs rounded-xl border border-gold-highlight/50 flex items-center justify-center gap-2 active:scale-95 transition-all shadow-xs"
           >
-            <span>{t.roleSelection.switchRoleBtn} (Bosh sahifaga qaytish)</span>
+            <span>{t.roleSelection.switchRoleBtn} ({t.roleSelection.returnToHome})</span>
           </button>
         </div>
       )}
@@ -145,9 +145,9 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
             </div>
             <div>
               <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider">
-                Sun'iy Intellekt (OpenAI)
+                {t.profile.aiTitle}
               </h3>
-              <p className="text-[10px] text-ink-muted">BozorVision va Bozorchi AI uchun</p>
+              <p className="text-[10px] text-ink-muted">{t.profile.aiSubtitle}</p>
             </div>
           </div>
           <span
@@ -178,11 +178,11 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
               className="min-h-[40px] px-3 bg-teal-action hover:bg-teal-hover text-white font-bold text-xs rounded-xl flex items-center gap-1 active:scale-95 transition-all"
             >
               {keySaved ? <Check className="w-3.5 h-3.5" /> : <Key className="w-3.5 h-3.5" />}
-              <span>{keySaved ? 'Saqlandi' : 'Saqlash'}</span>
+              <span>{keySaved ? t.profile.savedBtn : t.profile.saveBtn}</span>
             </button>
           </div>
           <p className="text-[10px] text-ink-muted mt-1 leading-tight">
-            Kalit kiritilsa, BozorVision fakturalarni bevosita GPT-4o-mini orqali tahlil qiladi. Kiritilmasa, barqaror demo rejim ishlaydi.
+            {t.profile.aiNotice}
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
             className="w-full min-h-[40px] bg-[#E8F3F1] hover:bg-[#D5EAE6] text-teal-action font-bold text-xs rounded-xl border border-teal-action/30 flex items-center justify-center gap-1.5 active:scale-95 transition-all"
           >
             <Sparkles className="w-3.5 h-3.5 text-gold-highlight fill-gold-highlight" />
-            <span>Bozorchi AI bilan suhbatlashish</span>
+            <span>{t.profile.chatWithAi}</span>
           </button>
         )}
       </div>
@@ -204,10 +204,10 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
       <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider mb-1 flex items-center gap-1.5">
           <HelpCircle className="w-3.5 h-3.5 text-teal-action" />
-          <span>Bozorchi AI haqida</span>
+          <span>{t.profile.aboutTitle}</span>
         </h3>
         <p className="text-xs text-ink-muted leading-relaxed">
-          Toshkentdagi kichik baqqollik va minimarketlar uchun ulgurji narxlar axboroti hamda mahalliy birgalikda xarid (pooling) tizimi.
+          {t.profile.aboutDesc}
         </p>
         <div className="mt-2 text-[11px] text-teal-action font-semibold">
           Lumora IT Case Competition • Tashkent 2026

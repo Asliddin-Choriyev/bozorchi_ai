@@ -25,10 +25,10 @@ export const DeliveryScanScreen: React.FC<Props> = ({
   const [isVerified, setIsVerified] = useState(autoTrigger);
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scannedItems, setScannedItems] = useState([
-    { name: "Shakar oq (Rossiya)", qty: "500 kg × 11 400 UZS", status: "Mos keldi ✓" },
-    { name: "Un 1-nav (Qozoq 50 kg)", qty: "15 qop × 255 000 UZS", status: "Mos keldi ✓" },
-    { name: "Pista yog'i (5L)", qty: "60 dona × 71 500 UZS", status: "Mos keldi ✓" },
-    { name: "Labo yetkazish ulushi", qty: "1 do'kon × 75 000 UZS", status: "Mos keldi ✓" }
+    { name: lang === 'uz' ? "Shakar oq (Rossiya)" : lang === 'ru' ? "Сахар белый (Россия)" : "White Sugar (Russia)", qty: "500 kg × 11 400 UZS", status: t.delivery.matched },
+    { name: lang === 'uz' ? "Un 1-nav (Qozoq 50 kg)" : lang === 'ru' ? "Мука 1 сорт (Казахстан)" : "Flour 1st Grade (50kg)", qty: "15 qop × 255 000 UZS", status: t.delivery.matched },
+    { name: lang === 'uz' ? "Pista yog'i (5L)" : lang === 'ru' ? "Масло подсолнечное (5л)" : "Sunflower Oil (5L)", qty: "60 dona × 71 500 UZS", status: t.delivery.matched },
+    { name: lang === 'uz' ? "Labo yetkazish ulushi" : lang === 'ru' ? "Доля доставки Labo" : "Shared Labo Delivery Share", qty: "1 × 75 000 UZS", status: t.delivery.matched }
   ]);
   const [aiNote, setAiNote] = useState<string | null>(null);
 
@@ -95,7 +95,7 @@ export const DeliveryScanScreen: React.FC<Props> = ({
             <span className="w-2 h-2 rounded-full bg-[#167E51] animate-ping"></span>
             <span>{t.delivery.statusArrived}</span>
           </div>
-          <span className="text-[11px] text-ink-muted">Yetkazildi: 11:45</span>
+          <span className="text-[11px] text-ink-muted">{t.delivery.deliveredTime}</span>
         </div>
 
         <div className="flex items-center gap-3 mt-2">
@@ -193,8 +193,8 @@ export const DeliveryScanScreen: React.FC<Props> = ({
             {/* OCR Extracted Items Table */}
             <div className="mt-3.5 bg-white/90 rounded-xl p-3 border border-[#BCE3CC] space-y-1.5 text-xs">
               <div className="font-bold text-[11px] text-ink-muted uppercase tracking-wider pb-1 border-b border-[#E0F0E6] flex items-center justify-between">
-                <span>Faktura qatorlari (AI OCR):</span>
-                <span className="text-[10px] text-[#167E51] font-bold">100% Moslik</span>
+                <span>{t.delivery.invoiceLines}</span>
+                <span className="text-[10px] text-[#167E51] font-bold">{t.delivery.match100}</span>
               </div>
               {scannedItems.map((item, idx) => (
                 <div key={idx} className="flex justify-between py-0.5">
@@ -215,8 +215,8 @@ export const DeliveryScanScreen: React.FC<Props> = ({
                   className="w-11 h-11 object-cover rounded-lg border border-[#A7D8BA] shadow-2xs"
                 />
                 <div className="text-xs">
-                  <span className="font-bold text-ink block leading-tight">Skanerlangan faktura rasmi</span>
-                  <span className="text-[10px] text-[#167E51] font-semibold">GPT-4o-mini Vision orqali tahlil qilindi</span>
+                  <span className="font-bold text-ink block leading-tight">{t.delivery.scannedPhotoTitle}</span>
+                  <span className="text-[10px] text-[#167E51] font-semibold">{t.delivery.analyzedByGpt}</span>
                 </div>
               </div>
             )}
@@ -229,10 +229,10 @@ export const DeliveryScanScreen: React.FC<Props> = ({
                 </div>
                 <div>
                   <span className="font-serif font-bold text-xs text-ink block">
-                    BozorCoins Mukofoti
+                    {t.delivery.bozorCoinsTitle}
                   </span>
                   <span className="text-[11px] text-[#785B0D] font-medium">
-                    Haqiqiy narx ma'lumotini kiritganingiz uchun
+                    {t.delivery.bozorCoinsDesc}
                   </span>
                 </div>
               </div>

@@ -31,21 +31,21 @@ export const SupplierResultScreen: React.FC<Props> = ({
         </div>
 
         <h2 className="font-serif font-black text-2xl text-white mt-1">
-          25 Tonna Yuk Sotildi!
+          {t.supplier.result.heroTitle}
         </h2>
         <p className="text-xs text-gold-highlight font-bold mt-1 max-w-[280px] mx-auto leading-relaxed">
           "{t.supplier.result.subtitle}"
         </p>
 
         <div className="mt-3 inline-flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-full text-xs text-[#CFE5E1]">
-          <span>4 kun bozor xaridorini kutish o'rniga 12 daqiqada</span>
+          <span>{t.supplier.result.heroBadge}</span>
         </div>
       </div>
 
       {/* Payout & Platform Fee Breakdown */}
       <div className="bg-cream-card rounded-[14px] p-4 border border-[#E3D9C4] shadow-card space-y-2.5">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider text-center">
-          Mablag' Yechilishi & Hisob-Kitob
+          {t.supplier.result.payoutTitle}
         </h3>
 
         <div className="space-y-2 text-xs pt-1">
@@ -71,7 +71,7 @@ export const SupplierResultScreen: React.FC<Props> = ({
                 {t.supplier.result.netPayout}
               </span>
               <span className="text-[10px] text-[#167E51] font-semibold">
-                Hisob raqamingizga o'tkazildi ✓
+                {t.supplier.result.transferredNotice}
               </span>
             </div>
             <span className="font-serif font-black text-lg text-teal-action">
@@ -93,7 +93,7 @@ export const SupplierResultScreen: React.FC<Props> = ({
                 {t.supplier.result.verifiedCardTitle}
               </h4>
               <p className="text-[11px] text-[#A6B8B4]">
-                Toshkentning 120 ta baqqollik klasteriga to'g'ridan-to'g'ri chiqish
+                {t.supplier.result.reachSubtitle}
               </p>
             </div>
           </div>
@@ -106,22 +106,22 @@ export const SupplierResultScreen: React.FC<Props> = ({
         <div className="space-y-1 text-xs text-[#D5E5E1]">
           <div className="flex items-center gap-1.5">
             <Check className="w-3.5 h-3.5 text-gold-highlight" />
-            <span>Klasterlar qidiruvida doim 1-o'rinda chiqish</span>
+            <span>{t.supplier.result.perk1}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Check className="w-3.5 h-3.5 text-gold-highlight" />
-            <span>2 soatlik Flash aksiyalarni cheksiz yuborish</span>
+            <span>{t.supplier.result.perk2}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <Check className="w-3.5 h-3.5 text-gold-highlight" />
-            <span>Eskrou orqali 0% to'lov kafolati</span>
+            <span>{t.supplier.result.perk3}</span>
           </div>
         </div>
 
         <button
           onClick={() => {
             triggerHaptic('success');
-            alert("Verified Ta'minotchi obunasi faollashtirildi!");
+            alert(t.supplier.result.subscriptionActivated);
           }}
           className="w-full min-h-[44px] bg-gold-highlight hover:bg-[#F3C759] text-ink font-serif font-bold text-xs rounded-xl shadow-xs flex items-center justify-center gap-2 active:scale-95 transition-all mt-2"
         >

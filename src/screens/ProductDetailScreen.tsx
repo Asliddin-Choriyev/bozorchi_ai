@@ -34,13 +34,13 @@ export const ProductDetailScreen: React.FC<Props> = ({
           </div>
           <div>
             <div className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-teal-action bg-[#E8F3F1] px-2 py-0.5 rounded-full border border-teal-action/20">
-              <span>Ulgurji Asosiy Tovar</span>
+              <span>{t.productDetail.heroBadge}</span>
             </div>
             <h2 className="font-serif font-bold text-lg text-ink leading-tight mt-1">
               {lang === 'uz' ? product.nameUz : lang === 'ru' ? product.nameRu : product.nameEn}
             </h2>
             <p className="text-xs text-ink-muted mt-0.5">
-              Standart qop: {product.volumeMin} • Toshkent bozorlari
+              {t.productDetail.standardBag} {product.volumeMin} • {t.productDetail.tashkentMarkets}
             </p>
           </div>
         </div>
@@ -67,9 +67,9 @@ export const ProductDetailScreen: React.FC<Props> = ({
                   : 'bg-[#FCEBEB] text-danger border border-danger/20'
               }`}
             >
-              {change.text} (7 kun)
+              {change.text} ({t.productDetail.days7})
             </span>
-            <p className="text-[10px] text-ink-muted mt-0.5">Oldingi: {formatUZS(product.previousPrice)}</p>
+            <p className="text-[10px] text-ink-muted mt-0.5">{t.productDetail.previousPrice} {formatUZS(product.previousPrice)}</p>
           </div>
         </div>
 
@@ -112,7 +112,7 @@ export const ProductDetailScreen: React.FC<Props> = ({
         <div className="flex items-start justify-between gap-2 relative z-10">
           <div>
             <div className="inline-flex items-center gap-1 bg-[#E3B341] text-ink text-[10px] font-black px-2 py-0.5 rounded-full mb-1">
-              <span>★ Eng foydali variant</span>
+              <span>{t.productDetail.bestVariantBadge}</span>
             </div>
             <h4 className="font-serif font-bold text-base">
               {t.productDetail.joinPoolBannerTitle}
@@ -121,9 +121,9 @@ export const ProductDetailScreen: React.FC<Props> = ({
               {t.productDetail.joinPoolBannerSubtitle}
             </p>
             <div className="mt-2 text-xs font-semibold text-[#F7DE9B] flex items-center gap-1.5">
-              <span className="line-through text-white/60">Yakka: 12 800 UZS</span>
+              <span className="line-through text-white/60">{t.productDetail.soloPrice} 12 800 UZS</span>
               <span className="text-sm font-bold text-[#E3B341] bg-black/30 px-2 py-0.5 rounded">
-                Guruh bilan: 11 400 UZS
+                {t.productDetail.withPoolPrice} 11 400 UZS
               </span>
             </div>
           </div>
@@ -134,7 +134,7 @@ export const ProductDetailScreen: React.FC<Props> = ({
             }}
             className="min-h-[44px] px-3.5 bg-[#E3B341] text-ink font-bold text-xs rounded-xl shadow-md hover:bg-[#F3C759] active:scale-95 transition-all flex items-center gap-1 shrink-0 mt-3"
           >
-            <span>Guruhga</span>
+            <span>{t.productDetail.toGroup}</span>
             <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
         </div>
@@ -150,7 +150,7 @@ export const ProductDetailScreen: React.FC<Props> = ({
           className="min-h-[48px] bg-cream-card border-2 border-teal-action text-teal-action hover:bg-teal-light rounded-xl font-bold text-xs p-2.5 flex flex-col items-center justify-center gap-1 shadow-card active:scale-[0.98] transition-all"
         >
           <Scale className="w-4 h-4 stroke-[2.2]" />
-          <span className="text-center leading-tight">5 ta ta'minotchini solishtirish</span>
+          <span className="text-center leading-tight">{t.productDetail.compareSuppliersBtn}</span>
         </button>
 
         <button
@@ -161,14 +161,14 @@ export const ProductDetailScreen: React.FC<Props> = ({
           className="min-h-[48px] bg-cream-card border border-[#D5C9AE] text-ink hover:border-gold-highlight hover:bg-gold-light rounded-xl font-bold text-xs p-2.5 flex flex-col items-center justify-center gap-1 shadow-card active:scale-[0.98] transition-all"
         >
           <Bell className="w-4 h-4 stroke-[2.2] text-[#B8871E]" />
-          <span className="text-center leading-tight">Narx tushishini kutish</span>
+          <span className="text-center leading-tight">{t.productDetail.setAlertBtn}</span>
         </button>
       </div>
 
       {/* Market Prices Breakdown Table */}
       <div className="bg-cream-card rounded-card p-3 border border-[#E3D9C4] shadow-card">
         <h4 className="font-serif font-bold text-xs text-ink mb-2">
-          Bozorlar bo'yicha solishtirma (Bugun):
+          {t.productDetail.marketsCompare}
         </h4>
         <div className="space-y-2 text-xs">
           <div className="flex items-center justify-between pb-1.5 border-b border-[#EFE7D4]">

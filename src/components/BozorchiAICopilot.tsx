@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
+import { translations } from '../i18n';
 import { askBozorchiAI, hasActiveAIKey } from '../utils/ai';
 import { Bot, Send, Sparkles, X, MessageSquare, Zap } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
@@ -12,6 +13,7 @@ interface Props {
 }
 
 export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, userName }) => {
+  const t = translations[lang];
   const [messages, setMessages] = useState<
     { sender: 'user' | 'ai'; text: string; time: string }[]
   >([
@@ -67,7 +69,7 @@ export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, user
         ...prev,
         {
           sender: 'ai',
-          text: "Kechirasiz, javob olishda xatolik yuz berdi. Iltimos qayta urinib ko'ring.",
+          text: t.copilot.error,
           time: now,
         },
       ]);
@@ -94,7 +96,7 @@ export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, user
                   {isLiveKey ? 'ChatGPT Live' : 'AI Assistant'}
                 </span>
               </div>
-              <p className="text-[10px] text-[#CFEBE6]">Toshkent ulgurji bozorlari aqlli maslahatchisi</p>
+              <p className="text-[10px] text-[#CFEBE6]">{t.copilot.subtitle}</p>
             </div>
           </div>
 
@@ -139,7 +141,7 @@ export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, user
           {loading && (
             <div className="flex items-center gap-2 text-ink-muted text-xs p-2 bg-white/80 rounded-xl border border-[#E7DFC8] w-fit">
               <div className="w-2 h-2 rounded-full bg-teal-action animate-ping"></div>
-              <span>Bozorchi AI tahlil qilmoqda...</span>
+              <span>{t.copilot.analyzing}</span>
             </div>
           )}
         </div>
@@ -168,7 +170,7 @@ export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, user
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSend();
             }}
-            placeholder="Savolingizni yozing..."
+            placeholder={t.copilot.placeholder}
             className="flex-1 min-h-[44px] px-3 bg-[#FAF7F0] border border-[#DDD3BD] rounded-xl text-xs text-ink placeholder-ink-muted focus:outline-none focus:ring-2 focus:ring-teal-action/40"
           />
           <button

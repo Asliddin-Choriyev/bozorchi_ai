@@ -23,6 +23,7 @@ import {
   DEMO_SHOP_PROFILE,
   DEMO_SUPPLIER_PROFILE
 } from './data/mock';
+import { translations } from './i18n';
 
 // Shop Owner Components & Screens
 import { Header } from './components/Header';
@@ -204,8 +205,14 @@ export const App: React.FC = () => {
       configureBackButton(canGoBack ? handleShopBack : null);
 
       if (shopScreen === 'group_order') {
+        const payEscrowText =
+          lang === 'uz'
+            ? "Eskrouga to'lash (13 890 000 UZS)"
+            : lang === 'ru'
+            ? 'Оплатить на эскроу (13 890 000 сум)'
+            : 'Pay into Escrow (13,890,000 UZS)';
         configureMainButton({
-          text: "Eskrouga to'lash (13 890 000 UZS)",
+          text: payEscrowText,
           onClick: () => {
             triggerHaptic('success');
             handleShopPayToEscrow();
@@ -213,8 +220,14 @@ export const App: React.FC = () => {
           color: '#0B6B62'
         });
       } else if (shopScreen === 'product_detail') {
+        const joinPoolText =
+          lang === 'uz'
+            ? "Chilonzor-9 Guruhiga qo'shilish"
+            : lang === 'ru'
+            ? 'Вступить в пул Чиланзар-9'
+            : 'Join Chilonzor-9 Pool';
         configureMainButton({
-          text: "Chilonzor-9 Guruhiga qo'shilish",
+          text: joinPoolText,
           onClick: () => {
             triggerHaptic('medium');
             navigateShopTo('group_order');
@@ -231,8 +244,14 @@ export const App: React.FC = () => {
       configureBackButton(canGoBack ? handleSupplierBack : null);
 
       if (supplierScreen === 'order_detail' && poolOrder.status === 'escrow_verified') {
+        const dispatchTruckText =
+          lang === 'uz'
+            ? "Labo mashinasini jo'natish (Sanjarbek)"
+            : lang === 'ru'
+            ? 'Отправить машину Labo (Санжарбек)'
+            : 'Dispatch Labo Truck (Sanjarbek)';
         configureMainButton({
-          text: "Labo mashinasini jo'natish (Sanjarbek)",
+          text: dispatchTruckText,
           onClick: () => {
             triggerHaptic('success');
             handleSupplierDispatchTruck();
@@ -405,23 +424,27 @@ export const App: React.FC = () => {
     );
   }
 
+  const t = translations[lang];
+
   // Titles for Shop Owner Header
   const getShopScreenTitle = (): string | undefined => {
     switch (shopScreen) {
-      case 'product_detail':
-        return selectedProduct.nameUz.split('(')[0].trim();
+      case 'product_detail': {
+        const pName = lang === 'uz' ? selectedProduct.nameUz : lang === 'ru' ? selectedProduct.nameRu : selectedProduct.nameEn;
+        return pName.split('(')[0].trim();
+      }
       case 'supplier_compare':
-        return "Ta'minotchilar";
+        return t.header.screenTitles.supplierCompare;
       case 'alerts':
-        return 'Narx Xabarlari';
+        return t.header.screenTitles.alerts;
       case 'group_order':
-        return 'Chilonzor-9 Guruhi';
+        return t.header.screenTitles.groupOrder;
       case 'delivery_scan':
-        return 'Yetkazish & Skaner';
+        return t.header.screenTitles.deliveryScan;
       case 'savings_result':
-        return 'Tejamkorlik Natijasi';
+        return t.header.screenTitles.savingsResult;
       case 'profile':
-        return 'Do\'kon Profili';
+        return t.header.screenTitles.profile;
       default:
         return undefined;
     }
@@ -431,17 +454,17 @@ export const App: React.FC = () => {
   const getSupplierScreenTitle = (): string | undefined => {
     switch (supplierScreen) {
       case 'prices':
-        return 'Prays-list';
+        return t.header.screenTitles.prices;
       case 'flash_discount':
-        return 'Flash Aksiya';
+        return t.header.screenTitles.flashDiscount;
       case 'orders':
-        return 'Buyurtmalar';
+        return t.header.screenTitles.orders;
       case 'order_detail':
-        return 'Buyurtma Bosqichlari';
+        return t.header.screenTitles.orderDetail;
       case 'supplier_result':
-        return 'Savdo Natijasi';
+        return t.header.screenTitles.supplierResult;
       case 'profile':
-        return 'Ta\'minotchi Profili';
+        return t.header.screenTitles.supplierProfile;
       default:
         return undefined;
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Language, ScreenType } from '../types';
+import { translations } from '../i18n';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
@@ -22,6 +23,7 @@ export const Header: React.FC<Props> = ({
   isTelegram,
   onOpenAI
 }) => {
+  const t = translations[lang];
   const showBack = currentScreen !== 'price_board' && currentScreen !== 'profile' && currentScreen !== 'alerts' && currentScreen !== 'group_order';
 
   return (
@@ -57,7 +59,7 @@ export const Header: React.FC<Props> = ({
               )}
             </h1>
             <p className="text-[11px] text-[#D1E7E3] leading-none">
-              {screenTitle ? 'Ulgurji Klaster' : 'Ulgurji Narxlar & Pool'}
+              {screenTitle ? t.header.shopClusterSubtitle : t.header.shopDefaultSubtitle}
             </p>
           </div>
         </div>

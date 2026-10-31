@@ -89,7 +89,7 @@ export const SupplierFlashDealScreen: React.FC<Props> = ({
       <div className="bg-[#0A1714] text-white rounded-[14px] p-4 border border-gold-highlight/40 shadow-card">
         <div className="inline-flex items-center gap-1 bg-gold-highlight text-ink text-[10px] font-black px-2 py-0.5 rounded-full mb-1">
           <Zap className="w-3 h-3 fill-ink" />
-          <span>2-Soatlik Klaster Aksiyasi</span>
+          <span>{t.supplier.flash.dealBadge}</span>
         </div>
         <h2 className="font-serif font-bold text-lg text-white">
           {t.supplier.flash.title}
@@ -111,11 +111,11 @@ export const SupplierFlashDealScreen: React.FC<Props> = ({
 
           <div className="bg-black/30 p-2.5 rounded-xl border border-white/10 text-center">
             <span className="text-[10px] text-[#A6B8B4] block uppercase font-bold">
-              Qamrab olingan
+              {t.supplier.flash.reachedLabel}
             </span>
             <span className="font-serif font-black text-lg text-white flex items-center justify-center gap-1">
               <Users className="w-4 h-4 text-teal-action" />
-              <span>48 ta do'kon</span>
+              <span>{t.supplier.flash.shopsCount}</span>
             </span>
           </div>
         </div>
@@ -124,15 +124,15 @@ export const SupplierFlashDealScreen: React.FC<Props> = ({
       {/* Flash Configuration Card */}
       <div className="bg-cream-card rounded-[14px] p-4 border border-[#E3D9C4] shadow-card space-y-3.5">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider">
-          Aksiya parametrlarini sozlash:
+          {t.supplier.flash.configTitle}
         </h3>
 
         {/* Product & Volume (Pre-selected 25 t Sugar) */}
         <div className="p-3 rounded-xl bg-[#FAF6EC] border border-[#E6DDCA] space-y-1">
           <div className="flex justify-between items-center text-xs">
-            <span className="font-serif font-bold text-ink">Shakar oq (Rossiya/Xorazm)</span>
+            <span className="font-serif font-bold text-ink">{t.supplier.flash.sugarProduct}</span>
             <span className="font-bold text-teal-action bg-[#E8F3F1] px-2 py-0.5 rounded text-[11px]">
-              25 tonna yuk
+              {t.supplier.flash.volumeBadge}
             </span>
           </div>
           <p className="text-[11px] text-ink-muted">
@@ -158,9 +158,9 @@ export const SupplierFlashDealScreen: React.FC<Props> = ({
           </div>
           <div className="mt-1 flex items-center justify-between text-[11px]">
             <span className="text-teal-action font-bold">
-              Chegirma miqdori: -1 400 UZS (-11%)
+              {t.supplier.flash.discountAmount}
             </span>
-            <span className="text-ink-muted">Tier 1 narx</span>
+            <span className="text-ink-muted">{t.supplier.flash.tier1Price}</span>
           </div>
         </div>
 

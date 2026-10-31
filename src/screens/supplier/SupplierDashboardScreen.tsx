@@ -57,7 +57,7 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
           {t.supplier.dashboard.welcome}{displayName ? `, ${displayName}!` : '!'}
         </h2>
         <p className="text-xs text-[#C5D5D1] mt-0.5">
-          Bugungi kunda Toshkent bo'yicha 12 ta klaster sizning ulgurji zaxirangizga ulangan.
+          {t.supplier.dashboard.activeClustersDesc}
         </p>
 
         {/* Action Buttons */}
@@ -93,7 +93,7 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
         </div>
         <div className="flex-1">
           <div className="inline-flex items-center gap-1 text-[10px] font-bold text-[#8C6D1F] bg-gold-highlight/30 px-2 py-0.2 rounded mb-0.5">
-            <span>Logistika bildirishnomasi</span>
+            <span>{t.supplier.dashboard.expectedStockTitle}</span>
           </div>
           <h4 className="font-serif font-bold text-xs text-ink">
             {t.supplier.dashboard.stockAlert}
@@ -108,7 +108,7 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
             }}
             className="mt-2 text-xs font-bold text-teal-action underline flex items-center gap-1"
           >
-            <span>2 soatlik chegirma e'lon qilish</span>
+            <span>{t.supplier.dashboard.broadcastFlashBtn}</span>
             <ArrowRight className="w-3 h-3" />
           </button>
         </div>
@@ -119,49 +119,57 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
         {/* Open Pool Orders */}
         <div className="bg-cream-card rounded-[14px] p-3 border border-[#E3D9C4] shadow-card">
           <div className="flex items-center justify-between text-ink-muted text-xs">
-            <span className="text-[10px] font-bold uppercase tracking-wider">Guruh Buyurtmalari</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">{t.supplier.dashboard.statOpenOrders}</span>
             <Store className="w-4 h-4 text-teal-action" />
           </div>
           <div className="text-xl font-serif font-black text-ink mt-1">
-            1 ta klaster
+            {lang === 'uz' ? '1 ta klaster' : lang === 'ru' ? '1 кластер' : '1 cluster'}
           </div>
-          <p className="text-[10px] text-teal-action font-semibold mt-0.5">5 ta baqqol birlashgan</p>
+          <p className="text-[10px] text-teal-action font-semibold mt-0.5">
+            {lang === 'uz' ? "5 ta do'kon birlashgan" : lang === 'ru' ? "5 магазинов в пуле" : "5 shops pooled"}
+          </p>
         </div>
 
         {/* Stock on Hand */}
         <div className="bg-cream-card rounded-[14px] p-3 border border-[#E3D9C4] shadow-card">
           <div className="flex items-center justify-between text-ink-muted text-xs">
-            <span className="text-[10px] font-bold uppercase tracking-wider">Kutilayotgan Yuk</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">{t.supplier.dashboard.statStock}</span>
             <PackageCheck className="w-4 h-4 text-gold-highlight" />
           </div>
           <div className="text-xl font-serif font-black text-ink mt-1">
-            25 tonna
+            {lang === 'uz' ? '25 tonna' : lang === 'ru' ? '25 тонн' : '25 tons'}
           </div>
-          <p className="text-[10px] text-ink-muted mt-0.5">Shakar (Xorazm/Rossiya)</p>
+          <p className="text-[10px] text-ink-muted mt-0.5">
+            {lang === 'uz' ? 'Shakar (Xorazm/Rossiya)' : lang === 'ru' ? 'Сахар белый' : 'White sugar'}
+          </p>
         </div>
 
         {/* Escrow Balance */}
         <div className="bg-cream-card rounded-[14px] p-3 border border-[#E3D9C4] shadow-card">
           <div className="flex items-center justify-between text-ink-muted text-xs">
-            <span className="text-[10px] font-bold uppercase tracking-wider">Eskrou Mablag'i</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">{t.supplier.dashboard.statEscrowBalance}</span>
             <ShieldCheck className="w-4 h-4 text-[#167E51]" />
           </div>
           <div className="text-base font-serif font-bold text-teal-action mt-1">
             {formatUZS(poolOrder.totalAmount)}
           </div>
-          <p className="text-[10px] text-[#167E51] font-semibold mt-0.5">Mablag' tasdiqlangan ✓</p>
+          <p className="text-[10px] text-[#167E51] font-semibold mt-0.5">
+            {lang === 'uz' ? "Mablag' tasdiqlangan ✓" : lang === 'ru' ? "Средства проверены ✓" : "Funds verified ✓"}
+          </p>
         </div>
 
         {/* Active Flash Deals */}
         <div className="bg-cream-card rounded-[14px] p-3 border border-[#E3D9C4] shadow-card">
           <div className="flex items-center justify-between text-ink-muted text-xs">
-            <span className="text-[10px] font-bold uppercase tracking-wider">Aktiv Aksiya</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider">{t.supplier.dashboard.statActiveDeals}</span>
             <Zap className="w-4 h-4 text-gold-highlight" />
           </div>
           <div className="text-xl font-serif font-black text-ink mt-1">
-            {flashDeal.isActive ? '11 400 UZS' : 'Faol emas'}
+            {flashDeal.isActive ? '11 400 UZS' : (lang === 'uz' ? 'Faol emas' : lang === 'ru' ? 'Не активна' : 'Inactive')}
           </div>
-          <p className="text-[10px] text-ink-muted mt-0.5">48 do'konga bildirilgan</p>
+          <p className="text-[10px] text-ink-muted mt-0.5">
+            {lang === 'uz' ? "48 do'konga bildirilgan" : lang === 'ru' ? "48 магазинов охвачено" : "48 shops notified"}
+          </p>
         </div>
       </div>
 
@@ -176,12 +184,12 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
           </div>
           <span className="text-[10px] font-bold text-[#167E51] bg-[#EBF7F0] px-2 py-0.5 rounded-full border border-[#167E51]/20">
             {poolOrder.status === 'payout_released'
-              ? 'To\'lov yechildi ✓'
+              ? (lang === 'uz' ? 'To\'lov yechildi ✓' : lang === 'ru' ? 'Выплата получена ✓' : 'Payout Released ✓')
               : poolOrder.status === 'delivered'
-              ? 'Do\'konga yetkazildi'
+              ? (lang === 'uz' ? 'Do\'konga yetkazildi' : lang === 'ru' ? 'Доставлено в магазин' : 'Delivered to Shop')
               : poolOrder.status === 'truck_departed'
-              ? 'Labo yo\'lda'
-              : 'Eskrou tasdiqlangan ✓'}
+              ? (lang === 'uz' ? 'Labo yo\'lda' : lang === 'ru' ? 'Labo в пути' : 'Labo Dispatched')
+              : (lang === 'uz' ? 'Eskrou tasdiqlangan ✓' : lang === 'ru' ? 'Эскроу подтвержден ✓' : 'Escrow Verified ✓')}
           </span>
         </div>
 

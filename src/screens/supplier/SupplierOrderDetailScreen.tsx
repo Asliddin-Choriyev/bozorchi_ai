@@ -46,32 +46,32 @@ export const SupplierOrderDetailScreen: React.FC<Props> = ({
     {
       num: 1,
       title: t.supplier.orderDetail.step1,
-      subtitle: `5 ta do'kon (${firstShopName}, Farhod, Navro'z, Oqtepa, Nurziyo)`,
+      subtitle: `${t.supplier.orders.shopsCountSuffix} (${firstShopName}, Farhod, Navro'z, Oqtepa, Nurziyo)`,
       time: poolOrder.createdAt || '10:20',
     },
     {
       num: 2,
       title: t.supplier.orderDetail.step2,
-      subtitle: '13 890 000 UZS Bozorchi AI eskrou hisobida muzlatildi',
+      subtitle: t.supplier.orderDetail.step2Subtitle,
       time: poolOrder.escrowVerifiedAt || '10:25',
     },
     {
       num: 3,
       title: t.supplier.orderDetail.step3,
-      subtitle: `Sanjarbek (${poolOrder.laboPlate}) yukni ombordan qabul qildi`,
-      time: poolOrder.departedAt || (poolOrder.status !== 'escrow_verified' ? '10:45' : 'Kutilmoqda'),
+      subtitle: `Sanjarbek (${poolOrder.laboPlate}) ${t.supplier.orderDetail.step3Subtitle}`,
+      time: poolOrder.departedAt || (poolOrder.status !== 'escrow_verified' ? '10:45' : t.supplier.orderDetail.waiting),
     },
     {
       num: 4,
       title: t.supplier.orderDetail.step4,
-      subtitle: 'Chilonzor 9-mavze, 1.5 km marshrut bo\'ylab yetkazilmoqda',
-      time: poolOrder.deliveredAt || (poolOrder.status === 'delivered' || poolOrder.status === 'payout_released' ? '11:45' : 'Kutilmoqda'),
+      subtitle: t.supplier.orderDetail.step4Subtitle,
+      time: poolOrder.deliveredAt || (poolOrder.status === 'delivered' || poolOrder.status === 'payout_released' ? '11:45' : t.supplier.orderDetail.waiting),
     },
     {
       num: 5,
       title: t.supplier.orderDetail.step5,
-      subtitle: 'BozorVision AI skanerdan so\'ng 13 723 320 UZS tushdi',
-      time: poolOrder.payoutReleasedAt || (poolOrder.status === 'payout_released' ? '11:48' : 'Kutilmoqda'),
+      subtitle: t.supplier.orderDetail.step5Subtitle,
+      time: poolOrder.payoutReleasedAt || (poolOrder.status === 'payout_released' ? '11:48' : t.supplier.orderDetail.waiting),
     },
   ];
 
@@ -83,7 +83,7 @@ export const SupplierOrderDetailScreen: React.FC<Props> = ({
           <span className="text-[10px] text-gold-highlight font-black uppercase tracking-wider">
             {poolOrder.id}
           </span>
-          <span className="text-[11px] text-[#A6B8B4]">Chilonzor-9 klasteri</span>
+          <span className="text-[11px] text-[#A6B8B4]">{t.supplier.orderDetail.clusterName}</span>
         </div>
 
         <h2 className="font-serif font-bold text-lg text-white">
@@ -93,7 +93,7 @@ export const SupplierOrderDetailScreen: React.FC<Props> = ({
           <span className="text-xl font-serif font-black text-gold-highlight">
             {formatUZS(poolOrder.totalAmount)}
           </span>
-          <span className="text-xs text-[#A6B8B4]">(Eskrou kafolatlangan)</span>
+          <span className="text-xs text-[#A6B8B4]">{t.supplier.orderDetail.escrowGuaranteed}</span>
         </div>
       </div>
 
@@ -161,7 +161,7 @@ export const SupplierOrderDetailScreen: React.FC<Props> = ({
 
         {poolOrder.status === 'truck_departed' && (
           <div className="p-3 rounded-xl bg-[#E8F3F1] border border-teal-action/40 text-center text-xs text-teal-action font-bold">
-            🚚 Labo mashinasi yo'lda (Sanjarbek). Do'kondor fakturani skanerlagach, to'lov darhol yechiladi!
+            {t.supplier.orderDetail.truckDispatchedNotice}
           </div>
         )}
 

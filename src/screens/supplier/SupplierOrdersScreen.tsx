@@ -40,11 +40,11 @@ export const SupplierOrdersScreen: React.FC<Props> = ({
             {t.supplier.orders.title}
           </h2>
           <p className="text-xs text-ink-muted">
-            Do'kondorlar klasterlaridan kelgan ulgurji talablar
+            {t.supplier.orders.subtitle}
           </p>
         </div>
         <span className="text-[10px] font-bold text-teal-action bg-[#E8F3F1] px-2 py-0.5 rounded-full border border-teal-action/20">
-          1 ta yangi buyurtma
+          {t.supplier.orders.newOrderBadge}
         </span>
       </div>
 
@@ -53,7 +53,7 @@ export const SupplierOrdersScreen: React.FC<Props> = ({
         {/* Tier badge & Escrow tag */}
         <div className="flex items-center justify-between">
           <div className="inline-flex items-center gap-1 bg-gold-highlight text-ink text-[10px] font-black px-2 py-0.5 rounded-full">
-            <span>{t.supplier.orders.tierLabel} (5 do'kon)</span>
+            <span>{t.supplier.orders.tierLabel} (5 {t.supplier.orders.shopsCountSuffix})</span>
           </div>
 
           <span
@@ -87,7 +87,7 @@ export const SupplierOrdersScreen: React.FC<Props> = ({
         {/* Products List Breakdown */}
         <div className="bg-[#FAF6EC] rounded-xl p-3 border border-[#E8DEC9] space-y-1.5 text-xs">
           <div className="font-bold text-[11px] text-ink-muted uppercase tracking-wider pb-1 border-b border-[#EAE0CF]">
-            Buyurtma tarkibi:
+            {t.supplier.orders.orderContents}
           </div>
           {poolOrder.itemsDetail.map((item, idx) => (
             <div key={idx} className="flex justify-between py-0.5">
@@ -106,7 +106,7 @@ export const SupplierOrdersScreen: React.FC<Props> = ({
           <Truck className="w-4 h-4 text-teal-action shrink-0" />
           <div className="text-[11px]">
             <span className="font-bold text-ink block">{poolOrder.routeDescription}</span>
-            <span className="text-teal-action">Yuk mashinasi: {poolOrder.laboPlate} ({poolOrder.driverName})</span>
+            <span className="text-teal-action">{t.supplier.orders.truckLabel} {poolOrder.laboPlate} ({poolOrder.driverName})</span>
           </div>
         </div>
 
@@ -114,7 +114,7 @@ export const SupplierOrdersScreen: React.FC<Props> = ({
         <div className="pt-2 border-t border-[#EDE4D0] flex items-center justify-between">
           <div>
             <span className="text-[10px] text-ink-muted uppercase font-bold block">
-              Jami to'lov:
+              {t.supplier.orders.totalPaymentLabel}
             </span>
             <span className="text-lg font-serif font-black text-teal-action">
               {formatUZS(poolOrder.totalAmount)}
@@ -142,7 +142,7 @@ export const SupplierOrdersScreen: React.FC<Props> = ({
                 }}
                 className="min-h-[42px] px-3.5 bg-cream-card border border-teal-action text-teal-action font-bold text-xs rounded-xl flex items-center gap-1 active:scale-95 transition-all"
               >
-                <span>Bosqichlar</span>
+                <span>{t.supplier.orders.stepsBtn}</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
             )}

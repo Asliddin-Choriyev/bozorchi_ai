@@ -1,5 +1,6 @@
 import React from 'react';
 import { Language, SupplierScreenType, SupplierProfile } from '../types';
+import { translations } from '../i18n';
 import { ArrowLeft, Sparkles, ShieldCheck, Truck } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
@@ -22,10 +23,11 @@ export const SupplierHeader: React.FC<Props> = ({
   profile,
   onOpenAI
 }) => {
+  const t = translations[lang];
   const showBack = currentScreen === 'order_detail' || currentScreen === 'supplier_result';
 
-  const defaultTitle = profile?.companyName || profile?.name || 'Ulgurji Baza';
-  const defaultLocation = profile?.marketLocation || "O'rikzor 4-blok";
+  const defaultTitle = profile?.companyName || profile?.name || (lang === 'uz' ? 'Ulgurji Baza' : lang === 'ru' ? 'Оптовая База' : 'Wholesale Supplier');
+  const defaultLocation = profile?.marketLocation || (lang === 'uz' ? "O'rikzor 4-blok" : lang === 'ru' ? "Урикзор 4-блок" : "O'rikzor Block 4");
 
   return (
     <header className="sticky top-0 z-40 bg-[#0A1714] text-white px-4 py-3 shadow-md border-b border-gold-highlight/30">
@@ -61,7 +63,7 @@ export const SupplierHeader: React.FC<Props> = ({
               )}
             </h1>
             <p className="text-[11px] text-[#A6B8B4] leading-none">
-              {defaultLocation} • Ta'minotchi Portali
+              {defaultLocation} • {t.header.supplierSubtitle}
             </p>
           </div>
         </div>

@@ -115,7 +115,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
       <div className="my-auto py-6 text-center space-y-3">
         <div className="inline-flex items-center gap-1.5 bg-[#E8F3F1] border border-teal-action/20 text-teal-action text-xs font-bold px-3 py-1 rounded-full shadow-2xs">
           <Sparkles className="w-3.5 h-3.5 text-gold-highlight fill-gold-highlight" />
-          <span>Toshkent B2B Ulgurji Platformasi</span>
+          <span>{t.roleSelection.platformSubtitle}</span>
         </div>
 
         <h1 className="font-serif font-black text-2xl text-ink leading-tight">
@@ -139,7 +139,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                 </div>
                 <div>
                   <div className="inline-flex items-center gap-1 bg-[#E8F3F1] text-teal-action text-[10px] font-black px-2 py-0.2 rounded mb-1">
-                    <span>Do'kondor</span>
+                    <span>{t.roleSelection.shopRoleLabel}</span>
                   </div>
                   <h3 className="font-serif font-bold text-base text-ink leading-tight">
                     {t.roleSelection.shopOwnerCardTitle}
@@ -149,7 +149,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                   </p>
                   <div className="mt-2 text-[10px] text-teal-action font-semibold flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-action"></span>
-                    <span>Baqqollik va do'kon xaridlari</span>
+                    <span>{t.roleSelection.shopSubDesc}</span>
                   </div>
                 </div>
               </div>
@@ -172,7 +172,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                 </div>
                 <div>
                   <div className="inline-flex items-center gap-1 bg-gold-highlight/20 text-gold-highlight border border-gold-highlight/40 text-[10px] font-black px-2 py-0.2 rounded mb-1">
-                    <span>Ulgurji Baza</span>
+                    <span>{t.roleSelection.supplierRoleLabel}</span>
                   </div>
                   <h3 className="font-serif font-bold text-base text-white leading-tight">
                     {t.roleSelection.supplierCardTitle}
@@ -182,7 +182,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                   </p>
                   <div className="mt-2 text-[10px] text-gold-highlight font-semibold flex items-center gap-1">
                     <ShieldCheck className="w-3 h-3 text-gold-highlight" />
-                    <span>Ulgurji sotuv va distribyutsiya</span>
+                    <span>{t.roleSelection.supplierSubDesc}</span>
                   </div>
                 </div>
               </div>
@@ -233,7 +233,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
             </div>
 
             <p className="text-xs text-ink-muted">
-              Ilovada ishlash uchun o'z ma'lumotlaringizni kiriting:
+              {t.roleSelection.modalDesc}
             </p>
 
             <form onSubmit={handleConfirmOnboarding} className="space-y-3">
@@ -247,7 +247,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                       type="text"
                       value={ownerName}
                       onChange={(e) => setOwnerName(e.target.value)}
-                      placeholder="Ismingizni kiriting (masalan: Asliddin)"
+                      placeholder={t.roleSelection.namePlaceholder}
                       className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
                     />
                   </div>
@@ -259,7 +259,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                       type="text"
                       value={shopName}
                       onChange={(e) => setShopName(e.target.value)}
-                      placeholder="Do'koningiz nomi (masalan: Baraka Market)"
+                      placeholder={t.roleSelection.shopNamePlaceholder}
                       className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
                     />
                   </div>
@@ -271,7 +271,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                       type="text"
                       value={shopDistrict}
                       onChange={(e) => setShopDistrict(e.target.value)}
-                      placeholder="Tuman yoki mavze (masalan: Chilonzor-9)"
+                      placeholder={t.roleSelection.shopDistrictPlaceholder}
                       className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
                     />
                   </div>
@@ -298,7 +298,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                       type="text"
                       value={supName}
                       onChange={(e) => setSupName(e.target.value)}
-                      placeholder="Ismingizni kiriting (masalan: Asliddin)"
+                      placeholder={t.roleSelection.namePlaceholder}
                       className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
                     />
                   </div>
@@ -310,7 +310,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                       type="text"
                       value={supCompany}
                       onChange={(e) => setSupCompany(e.target.value)}
-                      placeholder="Ulgurji baza yoki firma nomi"
+                      placeholder={t.roleSelection.supplierBizPlaceholder}
                       className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
                     />
                   </div>
@@ -322,7 +322,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                       type="text"
                       value={supLocation}
                       onChange={(e) => setSupLocation(e.target.value)}
-                      placeholder="Bozor yoki ombor (masalan: O'rikzor 4-baza)"
+                      placeholder={t.roleSelection.supplierLocPlaceholder}
                       className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
                     />
                   </div>

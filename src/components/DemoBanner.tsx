@@ -190,18 +190,18 @@ export const DemoBanner: React.FC<Props> = ({
               ⚡
             </span>
             <span className="text-[11px] font-bold tracking-wide text-gold-highlight">
-              {isSupplier ? 'Ta\'minotchi Demo (60s)' : 'Baqqol Demo (60s)'}
+              {isSupplier ? t.demo.bannerSupplierTitle : t.demo.bannerShopTitle}
             </span>
           </div>
 
           <div className="flex items-center gap-1">
             <button
               onClick={handleReset}
-              title="Qayta boshlash"
+              title={t.demo.resetTitle}
               className="text-[10px] text-white/70 hover:text-white px-1.5 py-0.5 rounded flex items-center gap-0.5"
             >
               <RotateCcw className="w-3 h-3" />
-              <span>Reset</span>
+              <span>{t.demo.reset}</span>
             </button>
             <button
               onClick={() => setIsExpanded(false)}
@@ -227,7 +227,7 @@ export const DemoBanner: React.FC<Props> = ({
         {/* Current step banner and Next Button */}
         <div className="flex items-center justify-between gap-2">
           <div className="text-[11px] font-medium leading-tight truncate">
-            <span className="text-white/60 mr-1">Qadam {stepIdx + 1}/6:</span>
+            <span className="text-white/60 mr-1">{t.demo.stepWord} {stepIdx + 1}/6:</span>
             <span className="text-white font-bold">{stepNames[stepIdx]}</span>
           </div>
 
@@ -235,7 +235,7 @@ export const DemoBanner: React.FC<Props> = ({
             onClick={handleNextStep}
             className="min-h-[36px] bg-gradient-to-r from-gold-highlight to-[#F3C759] text-ink font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 shadow-sm hover:brightness-105 active:scale-95 transition-all whitespace-nowrap shrink-0"
           >
-            <span>{stepIdx === 5 ? 'Qayta' : 'Keyingi qadam'}</span>
+            <span>{stepIdx === 5 ? t.demo.repeat : t.demo.nextStep}</span>
             <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
         </div>

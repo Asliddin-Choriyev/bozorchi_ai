@@ -72,7 +72,7 @@ export const AlertsScreen: React.FC<Props> = ({
               </p>
               <div className="mt-2 flex items-center gap-2">
                 <span className="text-xs font-black font-serif text-teal-action bg-white/80 px-2 py-0.5 rounded border border-[#E0D2B4]">
-                  Hozirgi narx: {formatUZS(triggeredAlert.currentPrice)}
+                  {t.alerts.currentPriceLabel} {formatUZS(triggeredAlert.currentPrice)}
                 </span>
                 <span className="text-[11px] text-ink-muted">Chorsu Optom</span>
               </div>
@@ -166,14 +166,14 @@ export const AlertsScreen: React.FC<Props> = ({
               type="number"
               value={targetPrice}
               onChange={(e) => setTargetPrice(e.target.value)}
-              placeholder="Masalan: 11400"
+              placeholder={t.alerts.placeholderPrice}
               className="w-full min-h-[44px] px-3 bg-[#FDFBF7] border border-[#DED4BD] rounded-xl text-xs font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-teal-action/40"
             />
           </div>
 
           <div>
             <label className="block text-[11px] font-bold text-ink-muted uppercase tracking-wider mb-1">
-              Bozor:
+              {t.alerts.marketLabel}
             </label>
             <div className="grid grid-cols-3 gap-2">
               {['Chorsu', "O'rikzor", 'Food City'].map((m) => (

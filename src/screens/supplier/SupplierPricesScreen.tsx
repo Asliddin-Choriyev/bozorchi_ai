@@ -122,8 +122,12 @@ export const SupplierPricesScreen: React.FC<Props> = ({
           {isAiScanning ? (
             <div className="py-6 space-y-2">
               <div className="w-12 h-12 mx-auto border-4 border-gold-highlight border-t-transparent rounded-full animate-spin"></div>
-              <p className="font-serif font-bold text-sm text-ink">BozorVision AI Skaneri...</p>
-              <p className="text-xs text-ink-muted">Qog'ozdagi kotirovkalar raqamlashtirilmoqda</p>
+              <p className="font-serif font-bold text-sm text-ink">
+                {lang === 'uz' ? 'BozorVision AI Skaneri...' : lang === 'ru' ? 'Сканер BozorVision AI...' : 'BozorVision AI Scanner...'}
+              </p>
+              <p className="text-xs text-ink-muted">
+                {lang === 'uz' ? "Qog'ozdagi kotirovkalar raqamlashtirilmoqda" : lang === 'ru' ? "Оцифровка прайс-листа с фото..." : "Digitizing paper ledger quotations..."}
+              </p>
             </div>
           ) : (
             <>
@@ -132,7 +136,7 @@ export const SupplierPricesScreen: React.FC<Props> = ({
               </div>
               <div>
                 <h4 className="font-serif font-bold text-sm text-ink">
-                  Daftar yoki hisob-faktura rasmini yuklash
+                  {lang === 'uz' ? "Daftar yoki hisob-faktura rasmini yuklash" : lang === 'ru' ? "Загрузка фото тетради или накладной" : "Upload ledger or whiteboard photo"}
                 </h4>
                 <p className="text-xs text-ink-muted mt-0.5">
                   {t.supplier.prices.photoPrompt}
@@ -144,7 +148,9 @@ export const SupplierPricesScreen: React.FC<Props> = ({
                 className="w-full min-h-[46px] bg-[#0A1714] hover:bg-black text-gold-highlight font-bold text-xs rounded-xl border border-gold-highlight/60 flex items-center justify-center gap-2 active:scale-95 transition-all shadow-sm"
               >
                 <Sparkles className="w-4 h-4 text-gold-highlight fill-gold-highlight" />
-                <span>BozorVision AI bilan fotosuratni tanish (Demo)</span>
+                <span>
+                  {lang === 'uz' ? "BozorVision AI bilan fotosuratni tanish (Demo)" : lang === 'ru' ? "Распознать через BozorVision AI (Демо)" : "Recognize photo with BozorVision AI (Demo)"}
+                </span>
               </button>
 
               {aiConfidence && (
@@ -161,15 +167,17 @@ export const SupplierPricesScreen: React.FC<Props> = ({
       {/* Editable Prices Form */}
       <div className="bg-cream-card rounded-[14px] p-4 border border-[#E3D9C4] shadow-card space-y-3">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider">
-          Kotirovkalarni tekshirish va tahrirlash:
+          {lang === 'uz' ? "Kotirovkalarni tekshirish va tahrirlash:" : lang === 'ru' ? "Проверка и редактирование цен:" : "Verify & Edit Price Quotations:"}
         </h3>
 
         <div className="space-y-2.5 text-xs">
           {/* Sugar */}
           <div className="flex items-center justify-between p-2 rounded-xl bg-[#FAF6EC] border border-[#E6DDCA]">
             <div>
-              <span className="font-serif font-bold text-ink block">Shakar oq (Rossiya/Xorazm)</span>
-              <span className="text-[10px] text-ink-muted">1 kg uchun ulgurji narx</span>
+              <span className="font-serif font-bold text-ink block">{t.supplier.prices.sugarLabel}</span>
+              <span className="text-[10px] text-ink-muted">
+                {lang === 'uz' ? "1 kg uchun ulgurji narx" : lang === 'ru' ? "Оптовая цена за 1 кг" : "Wholesale price per 1 kg"}
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <input
@@ -185,8 +193,10 @@ export const SupplierPricesScreen: React.FC<Props> = ({
           {/* Flour */}
           <div className="flex items-center justify-between p-2 rounded-xl bg-[#FAF6EC] border border-[#E6DDCA]">
             <div>
-              <span className="font-serif font-bold text-ink block">Un 1-nav (Qozoq 50 kg)</span>
-              <span className="text-[10px] text-ink-muted">1 qop uchun ulgurji narx</span>
+              <span className="font-serif font-bold text-ink block">{t.supplier.prices.flourLabel}</span>
+              <span className="text-[10px] text-ink-muted">
+                {lang === 'uz' ? "1 qop uchun ulgurji narx" : lang === 'ru' ? "Оптовая цена за 1 мешок" : "Wholesale price per 1 bag"}
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <input
@@ -202,8 +212,10 @@ export const SupplierPricesScreen: React.FC<Props> = ({
           {/* Oil */}
           <div className="flex items-center justify-between p-2 rounded-xl bg-[#FAF6EC] border border-[#E6DDCA]">
             <div>
-              <span className="font-serif font-bold text-ink block">Pista yog'i (5L)</span>
-              <span className="text-[10px] text-ink-muted">1 dona uchun narx</span>
+              <span className="font-serif font-bold text-ink block">{t.supplier.prices.oilLabel}</span>
+              <span className="text-[10px] text-ink-muted">
+                {lang === 'uz' ? "1 dona uchun narx" : lang === 'ru' ? "Цена за 1 шт" : "Price per 1 bottle"}
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <input
@@ -219,8 +231,12 @@ export const SupplierPricesScreen: React.FC<Props> = ({
           {/* Rice */}
           <div className="flex items-center justify-between p-2 rounded-xl bg-[#FAF6EC] border border-[#E6DDCA]">
             <div>
-              <span className="font-serif font-bold text-ink block">Guruch Alanga (Xorazm)</span>
-              <span className="text-[10px] text-ink-muted">1 kg uchun ulgurji narx</span>
+              <span className="font-serif font-bold text-ink block">
+                {lang === 'uz' ? "Guruch Alanga (kg)" : lang === 'ru' ? "Рис Аланга (кг)" : "Rice Alanga (kg)"}
+              </span>
+              <span className="text-[10px] text-ink-muted">
+                {lang === 'uz' ? "1 kg uchun ulgurji narx" : lang === 'ru' ? "Оптовая цена за 1 кг" : "Wholesale price per 1 kg"}
+              </span>
             </div>
             <div className="flex items-center gap-1">
               <input

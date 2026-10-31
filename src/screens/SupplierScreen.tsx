@@ -30,7 +30,7 @@ export const SupplierScreen: React.FC<Props> = ({
         <div className="flex items-start justify-between gap-2">
           <div>
             <div className="inline-flex items-center gap-1 bg-[#E3B341] text-ink text-[10px] font-black px-2 py-0.5 rounded-full mb-1">
-              <span>💡 Haqiqiy tejamkorlik siri</span>
+              <span>{t.suppliers.secretBadge}</span>
             </div>
             <h3 className="font-serif font-bold text-sm text-white">
               {t.suppliers.poolBanner}
@@ -46,7 +46,7 @@ export const SupplierScreen: React.FC<Props> = ({
             }}
             className="min-h-[44px] px-3 bg-[#E3B341] text-ink font-bold text-xs rounded-xl shadow-sm hover:bg-[#F3C759] active:scale-95 transition-all flex items-center gap-1 shrink-0 mt-2"
           >
-            <span>Guruhga</span>
+            <span>{t.suppliers.toPool}</span>
             <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
         </div>
@@ -63,7 +63,7 @@ export const SupplierScreen: React.FC<Props> = ({
           </p>
         </div>
         <span className="text-[10px] font-bold text-teal-action bg-[#E8F3F1] px-2 py-0.5 rounded-full border border-teal-action/20">
-          Shakar 500 kg
+          {t.suppliers.productPill}
         </span>
       </div>
 
@@ -132,7 +132,7 @@ export const SupplierScreen: React.FC<Props> = ({
               {/* Action row */}
               <div className="mt-3 pt-2.5 border-t border-[#EFE7D4] flex items-center justify-between text-xs">
                 <span className="text-[10px] text-ink-muted">
-                  500 kg uchun yakka narx: <strong className="text-ink font-bold">{formatUZS(sup.pricePerUnit * 500)}</strong>
+                  {t.suppliers.soloPriceFor500} <strong className="text-ink font-bold">{formatUZS(sup.pricePerUnit * 500)}</strong>
                 </span>
 
                 <button
@@ -143,7 +143,7 @@ export const SupplierScreen: React.FC<Props> = ({
                   }}
                   className="min-h-[44px] px-3 py-1 bg-cream-card hover:bg-teal-light text-teal-action font-bold text-xs rounded-lg border border-teal-action/40 active:scale-95 transition-all flex items-center gap-1"
                 >
-                  <span>Tanlash</span>
+                  <span>{t.suppliers.chooseBtn}</span>
                 </button>
               </div>
             </div>
@@ -161,7 +161,7 @@ export const SupplierScreen: React.FC<Props> = ({
           className="w-full min-h-[48px] bg-teal-action hover:bg-teal-hover text-white font-bold text-sm rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-[0.99] transition-all"
         >
           <Users className="w-4 h-4 stroke-[2.5]" />
-          <span>Chilonzor-9 Guruhiga o'tish (11 400 UZS)</span>
+          <span>{t.suppliers.joinPoolBtn}</span>
         </button>
       </div>
     </div>

@@ -71,14 +71,14 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart, shopProf
         {/* Time Saved Pill */}
         <div className="mt-3 inline-flex items-center gap-1.5 bg-white/15 px-3 py-1 rounded-full text-xs text-[#D8EFEB]">
           <Clock className="w-3.5 h-3.5 text-[#E3B341]" />
-          <span>{t.savings.timeSaved} (4:00 bozor safari o'rniga)</span>
+          <span>{t.savings.timeSaved} ({t.savings.timeSavedTrip})</span>
         </div>
       </div>
 
       {/* Before vs After Side-by-Side Comparison */}
       <div className="bg-cream-card rounded-card p-4 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-sm text-ink mb-3 text-center">
-          Yakka xarid vs Bozorchi AI Guruh Xaridi
+          {t.savings.comparisonTitle}
         </h3>
 
         <div className="space-y-3 text-xs">
@@ -164,13 +164,13 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart, shopProf
             </div>
             <div className="grid grid-cols-2 gap-2 text-[11px] pt-1 border-t border-teal-action/10">
               <div>
-                <span className="text-ink-muted block text-[10px]">Yakka yuk mashinasi:</span>
+                <span className="text-ink-muted block text-[10px]">{t.savings.aloneTruck}</span>
                 <span className="line-through text-danger/80">
                   {formatUZS(oldWay.deliveryTruck)}
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-teal-action font-semibold block text-[10px]">Labo (5 ga bo'lingan):</span>
+                <span className="text-teal-action font-semibold block text-[10px]">{t.savings.sharedLabo}</span>
                 <span className="font-bold text-teal-action font-serif">
                   {formatUZS(pooledWay.sharedVan)}
                 </span>
@@ -181,15 +181,15 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart, shopProf
           {/* Grand Totals */}
           <div className="pt-3 border-t-2 border-[#E1D6C0] space-y-1.5">
             <div className="flex justify-between items-center text-sm">
-              <span className="font-serif font-bold text-ink-muted">Oldingi jami sarf:</span>
+              <span className="font-serif font-bold text-ink-muted">{t.savings.oldTotal}</span>
               <span className="font-serif font-bold line-through text-danger/90">
-                {formatUZS(oldWay.totalCost)} (16 soat)
+                {formatUZS(oldWay.totalCost)} ({t.savings.hours16})
               </span>
             </div>
             <div className="flex justify-between items-center text-base">
-              <span className="font-serif font-extrabold text-teal-action">Bozorchi AI bilan:</span>
+              <span className="font-serif font-extrabold text-teal-action">{t.savings.withBozorchi}</span>
               <span className="font-serif font-black text-teal-action text-lg">
-                {formatUZS(pooledWay.totalCost)} (15 daqiqa)
+                {formatUZS(pooledWay.totalCost)} ({t.savings.mins15})
               </span>
             </div>
           </div>

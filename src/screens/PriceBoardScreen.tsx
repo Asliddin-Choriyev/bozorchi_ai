@@ -54,15 +54,15 @@ export const PriceBoardScreen: React.FC<Props> = ({
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-[11px] font-bold text-teal-action uppercase tracking-wider">
-              Toshkent Ulgurji Bozorlari
+              {t.priceBoard.topBannerTitle}
             </span>
           </div>
           <span className="text-[10px] text-ink-muted bg-[#EDE4D0] px-2 py-0.5 rounded font-medium">
-            Bugun, 07:00 yangilandi
+            {t.priceBoard.topBannerUpdated}
           </span>
         </div>
         <p className="text-xs text-ink-muted">
-          Do'koningiz uchun eng arzon narxlar va mahallangiz bilan birgalikda xarid (Chilonzor-9)
+          {t.priceBoard.topBannerDesc}
         </p>
       </div>
 
@@ -80,15 +80,15 @@ export const PriceBoardScreen: React.FC<Props> = ({
         <div className="flex items-center justify-between">
           <div>
             <div className="inline-flex items-center gap-1 bg-[#E3B341] text-ink text-[10px] font-black px-2 py-0.5 rounded-full mb-1">
-              <span>⚡ Faol guruh xaridi</span>
+              <span>{t.priceBoard.poolCalloutBadge}</span>
             </div>
-            <h3 className="font-serif font-bold text-sm">Chilonzor-9 Guruhiga qo'shiling</h3>
+            <h3 className="font-serif font-bold text-sm">{t.priceBoard.poolCalloutTitle}</h3>
             <p className="text-[11px] text-[#D4ECE8] mt-0.5">
-              Shakar 11 400 UZS/kg va Labo 75 000 UZS (5 do'kon to'ldi!)
+              {t.priceBoard.poolCalloutDesc}
             </p>
           </div>
           <button className="min-h-[44px] px-3 bg-[#E3B341] text-ink font-bold text-xs rounded-xl flex items-center gap-1 shadow-sm shrink-0">
-            <span>Ko'rish</span>
+            <span>{t.priceBoard.poolCalloutBtn}</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -111,12 +111,12 @@ export const PriceBoardScreen: React.FC<Props> = ({
             onClick={() => onSearchChange('')}
             className="absolute inset-y-0 right-0 pr-3 flex items-center text-xs font-semibold text-ink-muted hover:text-ink"
           >
-            Tozalash
+            {t.priceBoard.clear}
           </button>
         ) : (
           <div className="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
             <span className="text-[10px] font-bold text-teal-action bg-teal-light px-2 py-0.5 rounded-md border border-teal-action/20">
-              Ulgurji
+              {t.priceBoard.wholesalePill}
             </span>
           </div>
         )}
@@ -165,7 +165,7 @@ export const PriceBoardScreen: React.FC<Props> = ({
             >
               {isSugarPitchItem && (
                 <div className="absolute -top-2.5 right-3 bg-gold-highlight text-ink text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-xs flex items-center gap-1 border border-white">
-                  <span>★ Pitch Asosiy Tovari</span>
+                  <span>{t.priceBoard.pitchHeroBadge}</span>
                 </div>
               )}
 
@@ -185,7 +185,7 @@ export const PriceBoardScreen: React.FC<Props> = ({
 
                     {/* Fair range indicator */}
                     <div className="mt-1.5 flex items-center gap-1 text-[10px]">
-                      <span className="text-ink-muted">Adolatli koridor:</span>
+                      <span className="text-ink-muted">{t.priceBoard.fairCorridor}</span>
                       <span className="font-semibold text-teal-action bg-[#E8F3F1] px-1.5 py-0.2 rounded border border-teal-action/20">
                         {formatUZS(p.fairMin, false)} - {formatUZS(p.fairMax, false)}
                       </span>
@@ -220,7 +220,7 @@ export const PriceBoardScreen: React.FC<Props> = ({
                 <div className="flex items-center gap-1.5 text-teal-action">
                   <Users className="w-3.5 h-3.5 stroke-[2.5]" />
                   <span className="text-[11px] font-semibold">
-                    Guruh bilan: <strong className="text-ink font-bold">{formatUZS(p.poolPrice)}</strong>
+                    {t.priceBoard.withPool} <strong className="text-ink font-bold">{formatUZS(p.poolPrice)}</strong>
                   </span>
                 </div>
                 <div className="flex items-center gap-0.5 text-teal-action font-bold text-[11px]">
@@ -234,12 +234,12 @@ export const PriceBoardScreen: React.FC<Props> = ({
 
         {filteredProducts.length === 0 && (
           <div className="bg-cream-card rounded-card p-6 text-center border border-[#E3D9C4]">
-            <p className="text-xs text-ink-muted">"{searchQuery}" bo'yicha mahsulot topilmadi.</p>
+            <p className="text-xs text-ink-muted">"{searchQuery}" {t.priceBoard.noResults}</p>
             <button
               onClick={() => onSearchChange('')}
               className="mt-2 text-xs text-teal-action font-bold underline"
             >
-              Qidiruvni tozalash
+              {t.priceBoard.clearSearch}
             </button>
           </div>
         )}

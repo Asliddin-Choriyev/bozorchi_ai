@@ -48,12 +48,12 @@ export const ShowOtherSideButton: React.FC<Props> = ({
               {isShop ? (
                 <>
                   <Truck className="w-3.5 h-3.5" />
-                  <span>Ta'minotchi {supLabel}</span>
+                  <span>{t.roleSelection.supplierRoleLabel} {supLabel}</span>
                 </>
               ) : (
                 <>
                   <Store className="w-3.5 h-3.5" />
-                  <span>Do'kondor {shopLabel}</span>
+                  <span>{t.roleSelection.shopRoleLabel} {shopLabel}</span>
                 </>
               )}
             </span>

@@ -56,7 +56,7 @@ export const SupplierProfileScreen: React.FC<Props> = ({
       {/* Switch Role Button */}
       <div className="bg-cream-card rounded-[14px] p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider mb-2">
-          Rolni o'zgartirish:
+          {t.roleSelection.switchRoleCardTitle}
         </h3>
         <button
           onClick={() => {
@@ -66,14 +66,14 @@ export const SupplierProfileScreen: React.FC<Props> = ({
           className="w-full min-h-[44px] bg-[#E8F3F1] hover:bg-[#D4ECE8] text-teal-action font-bold text-xs rounded-xl border border-teal-action/40 flex items-center justify-center gap-2 active:scale-95 transition-all"
         >
           <ArrowLeftRight className="w-4 h-4" />
-          <span>{t.roleSelection.switchRoleBtn} (Bosh sahifaga qaytish)</span>
+          <span>{t.roleSelection.switchRoleBtn} ({t.roleSelection.returnToHome})</span>
         </button>
       </div>
 
       {/* Language Preference Card */}
       <div className="bg-cream-card rounded-[14px] p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-sm text-ink mb-2">
-          Ilova tili / Язык приложения
+          {t.profile.appLanguage}
         </h3>
         <div className="grid grid-cols-3 gap-2">
           {(['uz', 'ru', 'en'] as Language[]).map((l) => (
@@ -99,10 +99,10 @@ export const SupplierProfileScreen: React.FC<Props> = ({
       <div className="bg-cream-card rounded-[14px] p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider mb-1 flex items-center gap-1.5">
           <HelpCircle className="w-3.5 h-3.5 text-gold-highlight" />
-          <span>Bozorchi AI Ta'minotchi Portali</span>
+          <span>{t.profile.supplierAboutTitle}</span>
         </h3>
         <p className="text-xs text-ink-muted leading-relaxed">
-          Toshkentdagi ulgurji bazalar va yirik distribyutorlar uchun mahalliy do'konlar klasterlariga to'g'ridan-to'g'ri chiqish va kafolatlangan eskrou to'lovlari platformasi.
+          {t.profile.supplierAboutDesc}
         </p>
       </div>
     </div>

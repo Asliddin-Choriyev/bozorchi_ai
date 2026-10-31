@@ -36,7 +36,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
           </div>
           <span className="text-[11px] text-[#D0ECE7] flex items-center gap-1">
             <Clock className="w-3.5 h-3.5" />
-            <span>42 daqiqa qoldi</span>
+            <span>{t.groupOrder.minutesLeft}</span>
           </span>
         </div>
 
@@ -54,7 +54,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
               {t.groupOrder.progressSlots}: <strong className="text-[#E3B341]">{currentCount} / {maxSlots} ta</strong>
             </span>
             <span className="text-[11px] font-bold text-[#E3B341] bg-white/10 px-2 py-0.5 rounded">
-              Tier 1 (Eng arzon)
+              {t.groupOrder.tier1Cheapest}
             </span>
           </div>
 
@@ -68,11 +68,11 @@ export const GroupOrderScreen: React.FC<Props> = ({
           <div className="mt-2.5 grid grid-cols-2 gap-2 text-[10px] text-[#DCEFEA] pt-1 border-t border-white/10">
             <div className="flex items-center gap-1">
               <span className="w-2 h-2 rounded-full bg-white/40"></span>
-              <span>3 do'kon: 12 100 UZS/kg</span>
+              <span>{t.groupOrder.tier3Desc}</span>
             </div>
             <div className="flex items-center gap-1 font-bold text-[#E3B341]">
               <span className="w-2 h-2 rounded-full bg-[#E3B341]"></span>
-              <span>5 do'kon: 11 400 UZS/kg (To'ldi!)</span>
+              <span>{t.groupOrder.tier5Desc}</span>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
       <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-xs text-ink mb-2.5 uppercase tracking-wider flex items-center gap-1.5">
           <Store className="w-3.5 h-3.5 text-teal-action" />
-          <span>Guruhdagi 5 ta do'kon:</span>
+          <span>{t.groupOrder.shopsInPoolTitle}</span>
         </h3>
 
         <div className="space-y-2">
@@ -114,7 +114,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
                     </span>
                     {p.isCurrentUser && (
                       <span className="text-[9px] bg-teal-action text-white px-1.5 py-0.2 rounded font-bold">
-                        Siz
+                        {t.groupOrder.you}
                       </span>
                     )}
                   </div>
@@ -129,7 +129,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
               <div className="text-right">
                 <span className="text-[10px] font-bold text-[#167E51] bg-[#EBF7F0] px-2 py-0.5 rounded-full border border-[#167E51]/20 flex items-center gap-0.5">
                   <CheckCircle2 className="w-3 h-3 text-[#167E51]" />
-                  <span>Qo'shilgan</span>
+                  <span>{t.groupOrder.joined}</span>
                 </span>
               </div>
             </div>
@@ -144,7 +144,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
             {t.groupOrder.basketTitle}
           </h3>
           <span className="text-[10px] text-ink-muted font-semibold bg-[#EDE4D0] px-2 py-0.5 rounded">
-            Hajm chegirmasi bilan
+            {t.groupOrder.volumeDiscount}
           </span>
         </div>
 
@@ -153,9 +153,9 @@ export const GroupOrderScreen: React.FC<Props> = ({
           <div className="p-2.5 rounded-xl bg-[#F6F0E3] border border-[#E6DDCA]">
             <div className="flex items-start justify-between">
               <div>
-                <span className="font-serif font-bold text-ink">1. Shakar (Rossiya/Xorazm)</span>
+                <span className="font-serif font-bold text-ink">{t.groupOrder.sugarItem}</span>
                 <p className="text-[11px] text-ink-muted">500 kg × 11 400 UZS</p>
-                <p className="text-[10px] text-danger/80 line-through">Oldingi: 500 × 12 800 = 6 400 000 UZS</p>
+                <p className="text-[10px] text-danger/80 line-through">{t.groupOrder.oldPrefix} 500 × 12 800 = 6 400 000 UZS</p>
               </div>
               <div className="text-right">
                 <span className="font-serif font-bold text-sm text-teal-action">
@@ -172,9 +172,9 @@ export const GroupOrderScreen: React.FC<Props> = ({
           <div className="p-2.5 rounded-xl bg-[#F6F0E3] border border-[#E6DDCA]">
             <div className="flex items-start justify-between">
               <div>
-                <span className="font-serif font-bold text-ink">2. Un 1-nav (Qozoq 50 kg)</span>
+                <span className="font-serif font-bold text-ink">{t.groupOrder.flourItem}</span>
                 <p className="text-[11px] text-ink-muted">15 qop × 255 000 UZS</p>
-                <p className="text-[10px] text-danger/80 line-through">Oldingi: 15 × 280 000 = 4 200 000 UZS</p>
+                <p className="text-[10px] text-danger/80 line-through">{t.groupOrder.oldPrefix} 15 × 280 000 = 4 200 000 UZS</p>
               </div>
               <div className="text-right">
                 <span className="font-serif font-bold text-sm text-teal-action">
@@ -191,9 +191,9 @@ export const GroupOrderScreen: React.FC<Props> = ({
           <div className="p-2.5 rounded-xl bg-[#F6F0E3] border border-[#E6DDCA]">
             <div className="flex items-start justify-between">
               <div>
-                <span className="font-serif font-bold text-ink">3. Pista yog'i (5L)</span>
+                <span className="font-serif font-bold text-ink">{t.groupOrder.oilItem}</span>
                 <p className="text-[11px] text-ink-muted">60 dona × 71 500 UZS</p>
-                <p className="text-[10px] text-danger/80 line-through">Oldingi: 60 × 78 000 = 4 680 000 UZS</p>
+                <p className="text-[10px] text-danger/80 line-through">{t.groupOrder.oldPrefix} 60 × 78 000 = 4 680 000 UZS</p>
               </div>
               <div className="text-right">
                 <span className="font-serif font-bold text-sm text-teal-action">
@@ -212,9 +212,9 @@ export const GroupOrderScreen: React.FC<Props> = ({
               <div className="flex items-start gap-2">
                 <Truck className="w-4 h-4 text-teal-action mt-0.5" />
                 <div>
-                  <span className="font-serif font-bold text-ink">Umumiy Labo Yetkazib berish</span>
-                  <p className="text-[11px] text-ink-muted">375 000 UZS / 5 do'konga bo'lingan</p>
-                  <p className="text-[10px] text-danger/80 line-through">Yakka yuk mashinasi: 450 000 UZS</p>
+                  <span className="font-serif font-bold text-ink">{t.groupOrder.sharedVanTitle}</span>
+                  <p className="text-[11px] text-ink-muted">{t.groupOrder.sharedVanDesc}</p>
+                  <p className="text-[10px] text-danger/80 line-through">{t.groupOrder.aloneTruckDesc}</p>
                 </div>
               </div>
               <div className="text-right">
@@ -236,7 +236,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
               {t.groupOrder.totalTitle}
             </span>
             <p className="text-[11px] text-ink-muted line-through">
-              Oldingi: {formatUZS(oldWay.totalCost)}
+              {t.groupOrder.oldPrefix} {formatUZS(oldWay.totalCost)}
             </p>
           </div>
           <div className="text-right">
@@ -244,7 +244,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
               {formatUZS(pooledWay.totalCost)}
             </div>
             <div className="text-xs font-extrabold text-[#167E51] bg-[#EBF7F0] px-2 py-0.5 rounded border border-[#167E51]/20 inline-block mt-0.5">
-              Tejamkorlik: {formatUZS(savings.moneyUZS)} (-{savings.percent}%)
+              {t.groupOrder.savingsPrefix} {formatUZS(savings.moneyUZS)} (-{savings.percent}%)
             </div>
           </div>
         </div>
@@ -254,7 +254,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
       <div className="bg-[#FAF6EC] border border-[#E7D6A7] rounded-xl p-3 flex items-start gap-2.5">
         <ShieldCheck className="w-5 h-5 text-teal-action shrink-0 mt-0.5" />
         <div className="text-xs text-ink-muted leading-snug">
-          <strong className="text-ink font-bold block mb-0.5">Bozorchi AI Xavfsiz Eskrou kafolati:</strong>
+          <strong className="text-ink font-bold block mb-0.5">{t.groupOrder.escrowGuaranteeTitle}</strong>
           {t.groupOrder.escrowSafety}
         </div>
       </div>
