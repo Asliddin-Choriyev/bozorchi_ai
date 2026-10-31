@@ -100,7 +100,7 @@ def get_reply_keyboard(lang: str = "uz") -> ReplyKeyboardMarkup:
 def format_profile_text(profile: Dict[str, Any], lang: str = "uz") -> str:
     is_shop = profile["role"] == "shop_owner"
     role_label = (
-        ("Do'kon egasi (Baqqollik)" if is_shop else "Ulgurji Ta'minotchi (Distribyutor)")
+        ("Do'kon egasi (Do'kondor)" if is_shop else "Ulgurji Ta'minotchi (Distribyutor)")
         if lang == "uz" else
         ("Владелец магазина (Розница)" if is_shop else "Оптовый поставщик (Дистрибьютор)")
         if lang == "ru" else
@@ -329,7 +329,7 @@ async def ask_bozorchi_ai(prompt: str, lang: str = "uz") -> str:
         return (
             "🤖 *Bozorchi AI Maslahatchisi:*\n\n"
             "Toshkent ulgurji bozorlarida (O'rikzor, Food City, Chorsu) bugun narxlar barqaror koridorda. "
-            "Kichik baqqollik do'konlari uchun yakka bozorga borish o'rniga, mahalliy klaster bilan "
+            "Kichik oziq-ovqat do'konlari uchun yakka bozorga borish o'rniga, mahalliy klaster bilan "
             "birgalikda xarid (pooling) qilish har bir buyurtmada o'rtacha 11.7% tejash imkonini beradi.\n\n"
             "Batafsil tahlil va grafiklar uchun quyidagi tugma orqali Mini App-ni oching 👇"
         )
@@ -400,7 +400,7 @@ async def role_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     profile["role"] = "supplier" if profile["role"] == "shop_owner" else "shop_owner"
     lang = profile["lang"]
 
-    new_role_title = "Ta'minotchi (Ulgurji baza)" if profile["role"] == "supplier" else "Do'kon egasi (Baqqollik)"
+    new_role_title = "Ta'minotchi (Ulgurji baza)" if profile["role"] == "supplier" else "Do'kon egasi (Do'kondor)"
     await update.message.reply_text(
         f"🔄 *Rol muvaffaqiyatli o'zgartirildi!*\n\nSizning yangi rolingiz: *{new_role_title}*\n\n"
         f"Mini App va bot xabarlari endi yangi rolingizga moslashdi.",

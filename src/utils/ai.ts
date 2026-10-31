@@ -39,7 +39,7 @@ export async function askBozorchiAI(
     return getFallbackResponse(userQuestion, lang);
   }
 
-  const systemPrompt = `You are "Bozorchi AI", an expert wholesale trading assistant and market advisor for small grocery store owners (baqqollar) in Tashkent, Uzbekistan.
+  const systemPrompt = `You are "Bozorchi AI", an expert wholesale trading assistant and market advisor for small grocery store owners (do'kondorlar) in Tashkent, Uzbekistan.
 Current market context:
 - Primary markets: Chorsu, O'rikzor, Food City, Sergeli.
 - Sugar prices: Chorsu is lowest at 11,800 UZS/kg, Food City is 12,100 UZS/kg. Fair corridor is 11,400 - 12,800 UZS/kg.
@@ -200,7 +200,7 @@ function getFallbackResponse(question: string, lang: Language): string {
   }
 
   if (q.includes('klaster') || q.includes('chilonzor') || q.includes('pool') || q.includes('guruh')) {
-    return "👥 Chilonzor-9 klasteri haqida: 5 ta baqqol birlashganda Labo yetkazib berish xarajati 450 000 dan 75 000 UZS ga tushadi (har bir do'konga 375 000 UZS tejash). Shakar, un va yog' bo'yicha jami tejamkorlik: 1 840 000 UZS!";
+    return "👥 Chilonzor-9 klasteri haqida: 5 ta do'kondor birlashganda Labo yetkazib berish xarajati 450 000 dan 75 000 UZS ga tushadi (har bir do'konga 375 000 UZS tejash). Shakar, un va yog' bo'yicha jami tejamkorlik: 1 840 000 UZS!";
   }
 
   return "💡 Bozorchi AI maslahati: Bozorga soat 04:00 da o'zingiz borib 16 soat vaqt yo'qotgandan ko'ra, BozorNarx orqali mahallangiz bilan birgalikda buyurtma bering. Mahsulot to'g'ridan-to'g'ri do'koningizga Laboda keladi, faktura BozorVision orqali tekshirilib, pul xavfsiz eskroudan o'tkaziladi.";

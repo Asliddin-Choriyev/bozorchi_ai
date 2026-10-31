@@ -48,7 +48,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
 
     if (modalRole === 'shop_owner') {
       const finalName = ownerName.trim() || 'Do\'kondor';
-      const finalShop = shopName.trim() || (ownerName.trim() ? `${ownerName.trim()} Do'koni` : 'Baqqollik Do\'koni');
+      const finalShop = shopName.trim() || (ownerName.trim() ? `${ownerName.trim()} Do'koni` : 'Oziq-ovqat Do\'koni');
       const finalDist = shopDistrict.trim() || 'Chilonzor tumani';
       const finalPhone = shopPhone.trim() || '+998 90 123 45 67';
 

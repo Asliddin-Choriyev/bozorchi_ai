@@ -62,7 +62,7 @@ Lumora/
 │   │   ├── GroupOrderScreen.tsx   # Screen 5: Chilonzor-9 pool, 5 slots, Labo fee
 │   │   ├── DeliveryScanScreen.tsx # Screen 6: Camera invoice scan, BozorVision OCR
 │   │   ├── SavingsResultScreen.tsx# Screen 7: Before vs after summary & share card
-│   │   └── ProfileScreen.tsx      # Tab 4: Dilshod Baqqollik profile & BozorCoins
+│   │   └── ProfileScreen.tsx      # Tab 4: Dilshod Market profile & BozorCoins
 │   ├── utils/
 │   │   ├── format.ts              # UZS currency formatting and % changes
 │   │   └── telegram.ts            # Telegram WebApp SDK wrapper (Main/BackButton/Haptics)

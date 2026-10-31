@@ -284,7 +284,7 @@ export const MOCK_CHILONZOR_POOL: GroupPool = {
     },
     {
       id: 'p5',
-      name: 'Nurziyo Baqqoli',
+      name: 'Nurziyo Market',
       mahalla: 'Chilonzor 9-31',
       item: 'Shakar',
       qty: 250,
