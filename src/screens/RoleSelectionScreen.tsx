@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Language, UserRole, ShopOwnerProfile, SupplierProfile } from '../types';
 import { translations } from '../i18n';
-import { DEMO_SHOP_PROFILE, DEMO_SUPPLIER_PROFILE } from '../data/mock';
-import { Store, Truck, ArrowRight, ShieldCheck, Sparkles, X, CheckCircle2 } from 'lucide-react';
+import { Store, Truck, ArrowRight, ShieldCheck, Sparkles, X } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
 interface Props {
@@ -27,38 +26,50 @@ export const RoleSelectionScreen: React.FC<Props> = ({
   const t = translations[lang];
   const [modalRole, setModalRole] = useState<'shop_owner' | 'supplier' | null>(null);
 
-  // Form states initialized with prefilled demo values
-  const [shopName, setShopName] = useState(shopProfile.shopName || DEMO_SHOP_PROFILE.shopName);
-  const [ownerName, setOwnerName] = useState(shopProfile.name || DEMO_SHOP_PROFILE.name);
-  const [shopDistrict, setShopDistrict] = useState(shopProfile.district || DEMO_SHOP_PROFILE.district);
-  const [shopPhone, setShopPhone] = useState(shopProfile.phone || DEMO_SHOP_PROFILE.phone);
+  // Form states - clean inputs for user to enter their own name
+  const [ownerName, setOwnerName] = useState(shopProfile.name || '');
+  const [shopName, setShopName] = useState(shopProfile.shopName || '');
+  const [shopDistrict, setShopDistrict] = useState(shopProfile.district || '');
+  const [shopPhone, setShopPhone] = useState(shopProfile.phone || '');
 
-  const [supName, setSupName] = useState(supplierProfile.name || DEMO_SUPPLIER_PROFILE.name);
-  const [supCompany, setSupCompany] = useState(supplierProfile.companyName || DEMO_SUPPLIER_PROFILE.companyName);
-  const [supLocation, setSupLocation] = useState(supplierProfile.marketLocation || DEMO_SUPPLIER_PROFILE.marketLocation);
-  const [supPhone, setSupPhone] = useState(supplierProfile.phone || DEMO_SUPPLIER_PROFILE.phone);
+  const [supName, setSupName] = useState(supplierProfile.name || '');
+  const [supCompany, setSupCompany] = useState(supplierProfile.companyName || '');
+  const [supLocation, setSupLocation] = useState(supplierProfile.marketLocation || '');
+  const [supPhone, setSupPhone] = useState(supplierProfile.phone || '');
 
   const handleStartOnboarding = (role: 'shop_owner' | 'supplier') => {
     triggerHaptic('medium');
     setModalRole(role);
   };
 
-  const handleConfirmOnboarding = () => {
+  const handleConfirmOnboarding = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     triggerHaptic('success');
+
     if (modalRole === 'shop_owner') {
+      const finalName = ownerName.trim() || 'Do\'kondor';
+      const finalShop = shopName.trim() || (ownerName.trim() ? `${ownerName.trim()} Do'koni` : 'Baqqollik Do\'koni');
+      const finalDist = shopDistrict.trim() || 'Chilonzor tumani';
+      const finalPhone = shopPhone.trim() || '+998 90 123 45 67';
+
       onUpdateShopProfile({
-        name: ownerName,
-        shopName,
-        district: shopDistrict,
-        phone: shopPhone
+        name: finalName,
+        shopName: finalShop,
+        district: finalDist,
+        phone: finalPhone
       });
       onSelectRole('shop_owner');
     } else if (modalRole === 'supplier') {
+      const finalName = supName.trim() || 'Ta\'minotchi';
+      const finalCompany = supCompany.trim() || (supName.trim() ? `${supName.trim()} Optom` : 'Ulgurji Baza');
+      const finalLocation = supLocation.trim() || 'O\'rikzor bozori';
+      const finalPhone = supPhone.trim() || '+998 93 123 45 67';
+
       onUpdateSupplierProfile({
-        name: supName,
-        companyName: supCompany,
-        marketLocation: supLocation,
-        phone: supPhone,
+        name: finalName,
+        companyName: finalCompany,
+        marketLocation: finalLocation,
+        phone: finalPhone,
         verified: true,
         rating: 4.9
       });
@@ -138,7 +149,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                   </p>
                   <div className="mt-2 text-[10px] text-teal-action font-semibold flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-teal-action"></span>
-                    <span>{t.roleSelection.shopOwnerBadge}</span>
+                    <span>Baqqollik va do'kon xaridlari</span>
                   </div>
                 </div>
               </div>
@@ -171,7 +182,7 @@ export const RoleSelectionScreen: React.FC<Props> = ({
                   </p>
                   <div className="mt-2 text-[10px] text-gold-highlight font-semibold flex items-center gap-1">
                     <ShieldCheck className="w-3 h-3 text-gold-highlight" />
-                    <span>{t.roleSelection.supplierBadge}</span>
+                    <span>Ulgurji sotuv va distribyutsiya</span>
                   </div>
                 </div>
               </div>
@@ -222,116 +233,126 @@ export const RoleSelectionScreen: React.FC<Props> = ({
             </div>
 
             <p className="text-xs text-ink-muted">
-              Demo taqdimot uchun qiymatlar avtomatik to'ldirilgan. "Davom etish" tugmasini bosing:
+              Ilovada ishlash uchun o'z ma'lumotlaringizni kiriting:
             </p>
 
-            {modalRole === 'shop_owner' ? (
-              <div className="space-y-2.5 text-xs">
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.nameLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={ownerName}
-                    onChange={(e) => setOwnerName(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
+            <form onSubmit={handleConfirmOnboarding} className="space-y-3">
+              {modalRole === 'shop_owner' ? (
+                <div className="space-y-2.5 text-xs">
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.nameLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={ownerName}
+                      onChange={(e) => setOwnerName(e.target.value)}
+                      placeholder="Ismingizni kiriting (masalan: Asliddin)"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.bizNameLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={shopName}
+                      onChange={(e) => setShopName(e.target.value)}
+                      placeholder="Do'koningiz nomi (masalan: Baraka Market)"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.locationLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={shopDistrict}
+                      onChange={(e) => setShopDistrict(e.target.value)}
+                      placeholder="Tuman yoki mavze (masalan: Chilonzor-9)"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.phoneLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={shopPhone}
+                      onChange={(e) => setShopPhone(e.target.value)}
+                      placeholder="+998 90 123 45 67"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.bizNameLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={shopName}
-                    onChange={(e) => setShopName(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
+              ) : (
+                <div className="space-y-2.5 text-xs">
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.nameLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={supName}
+                      onChange={(e) => setSupName(e.target.value)}
+                      placeholder="Ismingizni kiriting (masalan: Asliddin)"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.bizNameLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={supCompany}
+                      onChange={(e) => setSupCompany(e.target.value)}
+                      placeholder="Ulgurji baza yoki firma nomi"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.locationLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={supLocation}
+                      onChange={(e) => setSupLocation(e.target.value)}
+                      placeholder="Bozor yoki ombor (masalan: O'rikzor 4-baza)"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
+                      {t.roleSelection.phoneLabel}
+                    </label>
+                    <input
+                      type="text"
+                      value={supPhone}
+                      onChange={(e) => setSupPhone(e.target.value)}
+                      placeholder="+998 93 123 45 67"
+                      className="w-full min-h-[42px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold placeholder:text-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-gold-highlight/40"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.locationLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={shopDistrict}
-                    onChange={(e) => setShopDistrict(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.phoneLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={shopPhone}
-                    onChange={(e) => setShopPhone(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="space-y-2.5 text-xs">
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.nameLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={supName}
-                    onChange={(e) => setSupName(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.bizNameLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={supCompany}
-                    onChange={(e) => setSupCompany(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.locationLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={supLocation}
-                    onChange={(e) => setSupLocation(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-ink-muted uppercase mb-0.5">
-                    {t.roleSelection.phoneLabel}
-                  </label>
-                  <input
-                    type="text"
-                    value={supPhone}
-                    onChange={(e) => setSupPhone(e.target.value)}
-                    className="w-full min-h-[40px] px-3 bg-white border border-[#DED4BD] rounded-xl text-ink font-semibold"
-                  />
-                </div>
-              </div>
-            )}
+              )}
 
-            <button
-              onClick={handleConfirmOnboarding}
-              className={`w-full min-h-[48px] rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition-all text-white ${
-                modalRole === 'shop_owner'
-                  ? 'bg-teal-action hover:bg-teal-hover'
-                  : 'bg-[#0A1714] hover:bg-black border border-gold-highlight text-gold-highlight'
-              }`}
-            >
-              <span>{t.roleSelection.continueBtn}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <button
+                type="submit"
+                className={`w-full min-h-[48px] rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition-all text-white mt-2 ${
+                  modalRole === 'shop_owner'
+                    ? 'bg-teal-action hover:bg-teal-hover'
+                    : 'bg-[#0A1714] hover:bg-black border border-gold-highlight text-gold-highlight'
+                }`}
+              >
+                <span>{t.roleSelection.continueBtn}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </form>
           </div>
         </div>
       )}

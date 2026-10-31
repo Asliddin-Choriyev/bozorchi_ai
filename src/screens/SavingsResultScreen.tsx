@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Language } from '../types';
+import { Language, ShopOwnerProfile } from '../types';
 import { translations } from '../i18n';
 import { REAL_DECK_NUMBERS } from '../data/mock';
 import { formatUZS } from '../utils/format';
@@ -9,14 +9,18 @@ import { triggerHaptic } from '../utils/telegram';
 interface Props {
   lang: Language;
   onRestart: () => void;
+  shopProfile?: ShopOwnerProfile;
 }
 
-export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart }) => {
+export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart, shopProfile }) => {
   const t = translations[lang];
   const { oldWay, pooledWay, savings } = REAL_DECK_NUMBERS;
   const [copied, setCopied] = useState(false);
 
-  const shareText = `📊 Bozorchi AI bilan xarid natijam:\n💰 1 840 000 UZS tejaldi (-11.7%)\n⏱ 15 soat 45 daqiqa tejaldi!\nJami: 13 890 000 UZS (oldin 15 730 000 UZS edi).\nChilonzor-9 klasterida birgalikda xarid qildik! 🚀`;
+  const displayShopName = shopProfile?.shopName || shopProfile?.name || "Do'konimiz";
+  const displayDistrict = shopProfile?.district || "Chilonzor-9";
+
+  const shareText = `📊 Bozorchi AI bilan xarid natijam:\n🏪 ${displayShopName} (${displayDistrict})\n💰 1 840 000 UZS tejaldi (-11.7%)\n⏱ 15 soat 45 daqiqa tejaldi!\nJami: 13 890 000 UZS (oldin 15 730 000 UZS edi).\nKlasterda birgalikda xarid qildik! 🚀`;
 
   const handleShare = () => {
     triggerHaptic('success');
@@ -54,7 +58,7 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart }) => {
         </div>
 
         <div className="inline-flex items-center gap-1 bg-[#E3B341] text-ink text-[11px] font-black px-3 py-0.5 rounded-full mb-1">
-          <span>{t.savings.subtitle}</span>
+          <span>{displayShopName} — {displayDistrict}</span>
         </div>
 
         <h2 className="font-serif font-black text-2xl text-white mt-1">

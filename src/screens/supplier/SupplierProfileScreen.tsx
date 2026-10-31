@@ -25,7 +25,7 @@ export const SupplierProfileScreen: React.FC<Props> = ({
       <div className="bg-[#0A1714] text-white rounded-[14px] p-4 border border-gold-highlight/40 shadow-card">
         <div className="flex items-center gap-3">
           <div className="w-14 h-14 rounded-2xl bg-gold-highlight text-ink flex items-center justify-center font-serif font-black text-2xl shadow-sm">
-            E
+            {(profile.companyName || profile.name || 'T')[0].toUpperCase()}
           </div>
           <div>
             <div className="inline-flex items-center gap-1 text-[10px] font-bold text-gold-highlight bg-gold-highlight/20 px-2 py-0.5 rounded-full border border-gold-highlight/40">

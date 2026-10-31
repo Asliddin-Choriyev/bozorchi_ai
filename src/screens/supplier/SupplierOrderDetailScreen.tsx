@@ -1,5 +1,5 @@
 import React from 'react';
-import { Language, PoolOrder } from '../../types';
+import { Language, PoolOrder, ShopOwnerProfile } from '../../types';
 import { translations } from '../../i18n';
 import { formatUZS } from '../../utils/format';
 import { Truck, CheckCircle2, Clock, ShieldCheck, ArrowRight, UserCheck, Check } from 'lucide-react';
@@ -10,13 +10,15 @@ interface Props {
   poolOrder: PoolOrder;
   onDispatchTruck: () => void;
   onNavigateResult: () => void;
+  shopProfile?: ShopOwnerProfile;
 }
 
 export const SupplierOrderDetailScreen: React.FC<Props> = ({
   lang,
   poolOrder,
   onDispatchTruck,
-  onNavigateResult
+  onNavigateResult,
+  shopProfile
 }) => {
   const t = translations[lang];
 
@@ -38,11 +40,13 @@ export const SupplierOrderDetailScreen: React.FC<Props> = ({
     }
   };
 
+  const firstShopName = shopProfile?.name || shopProfile?.shopName || "Do'kon";
+
   const steps = [
     {
       num: 1,
       title: t.supplier.orderDetail.step1,
-      subtitle: '5 ta do\'kon (Dilshod, Farhod, Navro\'z, Oqtepa, Nurziyo)',
+      subtitle: `5 ta do'kon (${firstShopName}, Farhod, Navro'z, Oqtepa, Nurziyo)`,
       time: poolOrder.createdAt || '10:20',
     },
     {

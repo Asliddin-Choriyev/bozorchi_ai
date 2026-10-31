@@ -1,5 +1,5 @@
 import React from 'react';
-import { Language, PoolOrder, FlashDeal } from '../../types';
+import { Language, PoolOrder, FlashDeal, SupplierProfile } from '../../types';
 import { translations } from '../../i18n';
 import { formatUZS } from '../../utils/format';
 import {
@@ -21,6 +21,7 @@ interface Props {
   lang: Language;
   poolOrder: PoolOrder;
   flashDeal: FlashDeal;
+  supplierProfile?: SupplierProfile;
   onNavigatePrices: () => void;
   onNavigateFlash: () => void;
   onNavigateOrderDetail: () => void;
@@ -30,11 +31,15 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
   lang,
   poolOrder,
   flashDeal,
+  supplierProfile,
   onNavigatePrices,
   onNavigateFlash,
   onNavigateOrderDetail
 }) => {
   const t = translations[lang];
+
+  const displayName = supplierProfile?.name || '';
+  const displayLocation = supplierProfile?.marketLocation || "O'rikzor 4-blok, 12-ombor";
 
   return (
     <div className="space-y-3.5 pb-16">
@@ -45,11 +50,11 @@ export const SupplierDashboardScreen: React.FC<Props> = ({
             <ShieldCheck className="w-3 h-3 text-ink" />
             <span>Verified Wholesale Supplier</span>
           </div>
-          <span className="text-[10px] text-[#A6B8B4]">O'rikzor 4-blok, 12-ombor</span>
+          <span className="text-[10px] text-[#A6B8B4]">{displayLocation}</span>
         </div>
 
         <h2 className="font-serif font-bold text-lg text-white">
-          {t.supplier.dashboard.welcome}
+          {t.supplier.dashboard.welcome}{displayName ? `, ${displayName}!` : '!'}
         </h2>
         <p className="text-xs text-[#C5D5D1] mt-0.5">
           Bugungi kunda Toshkent bo'yicha 12 ta klaster sizning ulgurji zaxirangizga ulangan.

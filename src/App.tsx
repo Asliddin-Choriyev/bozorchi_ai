@@ -95,6 +95,39 @@ export const App: React.FC = () => {
   const [isAutoDeliveryTriggered, setIsAutoDeliveryTriggered] = useState(false);
   const [isAIOpen, setIsAIOpen] = useState(false);
 
+  // Profile update handlers that keep shared state synced
+  const handleUpdateShopProfile = (newProfile: ShopOwnerProfile) => {
+    setShopProfile(newProfile);
+    setPool((prev) => ({
+      ...prev,
+      participants: prev.participants.map((p) =>
+        p.isCurrentUser
+          ? {
+              ...p,
+              name: `${newProfile.shopName || newProfile.name || "Do'konim"} (Siz)`,
+              mahalla: newProfile.district || p.mahalla
+            }
+          : p
+      )
+    }));
+  };
+
+  const handleUpdateSupplierProfile = (newProfile: SupplierProfile) => {
+    setSupplierProfile(newProfile);
+    setSuppliers((prev) =>
+      prev.map((s) =>
+        s.id === 'sup-2'
+          ? {
+              ...s,
+              name: `${newProfile.companyName || newProfile.name || 'Ulgurji Baza'} (Siz)`,
+              market: newProfile.marketLocation || s.market,
+              phone: newProfile.phone || s.phone
+            }
+          : s
+      )
+    );
+  };
+
   // Initialize Telegram WebApp on mount
   useEffect(() => {
     initTelegramApp();
@@ -366,8 +399,8 @@ export const App: React.FC = () => {
         }}
         shopProfile={shopProfile}
         supplierProfile={supplierProfile}
-        onUpdateShopProfile={setShopProfile}
-        onUpdateSupplierProfile={setSupplierProfile}
+        onUpdateShopProfile={handleUpdateShopProfile}
+        onUpdateSupplierProfile={handleUpdateSupplierProfile}
       />
     );
   }
@@ -442,6 +475,8 @@ export const App: React.FC = () => {
           activeRole={activeRole}
           onToggleRole={handleToggleRole}
           lang={lang}
+          shopProfile={shopProfile}
+          supplierProfile={supplierProfile}
         />
 
         {/* ROLE-BASED HEADER */}
@@ -462,6 +497,7 @@ export const App: React.FC = () => {
             lang={lang}
             onLanguageChange={setLang}
             screenTitle={getSupplierScreenTitle()}
+            profile={supplierProfile}
             onOpenAI={() => setIsAIOpen(true)}
           />
         )}
@@ -526,6 +562,7 @@ export const App: React.FC = () => {
                   pool={pool}
                   lang={lang}
                   onPayToEscrow={handleShopPayToEscrow}
+                  shopProfile={shopProfile}
                 />
               )}
 
@@ -540,6 +577,7 @@ export const App: React.FC = () => {
               {shopScreen === 'savings_result' && (
                 <SavingsResultScreen
                   lang={lang}
+                  shopProfile={shopProfile}
                   onRestart={() => {
                     setSearchQuery('');
                     setIsAutoDeliveryTriggered(false);
@@ -554,6 +592,7 @@ export const App: React.FC = () => {
                   onLanguageChange={setLang}
                   onOpenAI={() => setIsAIOpen(true)}
                   onSwitchRole={handleSwitchRole}
+                  profile={shopProfile}
                 />
               )}
             </>
@@ -567,6 +606,7 @@ export const App: React.FC = () => {
                   lang={lang}
                   poolOrder={poolOrder}
                   flashDeal={flashDeal}
+                  supplierProfile={supplierProfile}
                   onNavigatePrices={() => navigateSupplierTo('prices')}
                   onNavigateFlash={() => navigateSupplierTo('flash_discount')}
                   onNavigateOrderDetail={() => navigateSupplierTo('order_detail')}
@@ -606,6 +646,7 @@ export const App: React.FC = () => {
                   poolOrder={poolOrder}
                   onDispatchTruck={handleSupplierDispatchTruck}
                   onNavigateResult={() => navigateSupplierTo('supplier_result')}
+                  shopProfile={shopProfile}
                 />
               )}
 
@@ -653,6 +694,11 @@ export const App: React.FC = () => {
           isOpen={isAIOpen}
           onClose={() => setIsAIOpen(false)}
           lang={lang}
+          userName={
+            activeRole === 'shop_owner'
+              ? shopProfile.name || shopProfile.shopName
+              : supplierProfile.name || supplierProfile.companyName
+          }
         />
       </div>
     </div>

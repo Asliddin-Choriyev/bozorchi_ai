@@ -1,5 +1,5 @@
 import React from 'react';
-import { GroupPool, Language } from '../types';
+import { GroupPool, Language, ShopOwnerProfile } from '../types';
 import { translations } from '../i18n';
 import { formatUZS } from '../utils/format';
 import { REAL_DECK_NUMBERS } from '../data/mock';
@@ -10,12 +10,14 @@ interface Props {
   pool: GroupPool;
   lang: Language;
   onPayToEscrow: () => void;
+  shopProfile?: ShopOwnerProfile;
 }
 
 export const GroupOrderScreen: React.FC<Props> = ({
   pool,
   lang,
-  onPayToEscrow
+  onPayToEscrow,
+  shopProfile
 }) => {
   const t = translations[lang];
   const { oldWay, pooledWay, savings } = REAL_DECK_NUMBERS;
@@ -105,7 +107,11 @@ export const GroupOrderScreen: React.FC<Props> = ({
                 </div>
                 <div>
                   <div className="font-serif font-bold text-ink flex items-center gap-1.5">
-                    <span>{p.name}</span>
+                    <span>
+                      {p.isCurrentUser
+                        ? (shopProfile?.shopName || shopProfile?.name || p.name)
+                        : p.name}
+                    </span>
                     {p.isCurrentUser && (
                       <span className="text-[9px] bg-teal-action text-white px-1.5 py-0.2 rounded font-bold">
                         Siz
@@ -113,7 +119,9 @@ export const GroupOrderScreen: React.FC<Props> = ({
                     )}
                   </div>
                   <span className="text-[10px] text-ink-muted">
-                    {p.mahalla} • {p.item} ({p.qty} {p.unit})
+                    {p.isCurrentUser
+                      ? (shopProfile?.district || p.mahalla)
+                      : p.mahalla} • {p.item} ({p.qty} {p.unit})
                   </span>
                 </div>
               </div>

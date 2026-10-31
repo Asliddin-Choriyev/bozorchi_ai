@@ -175,7 +175,7 @@ export const MOCK_SUPPLIERS: Supplier[] = [
   },
   {
     id: 'sup-2',
-    name: "Elyor Baraka Optom (Elyor Aka)",
+    name: "Ulgurji Baza (Siz)",
     market: "O'rikzor bozori, 4-blok",
     pricePerUnit: 11950,
     verified: true,
@@ -247,7 +247,7 @@ export const MOCK_CHILONZOR_POOL: GroupPool = {
   participants: [
     {
       id: 'p1',
-      name: 'Dilshod Baqqollik (Siz)',
+      name: "Mening Do'konim (Siz)",
       mahalla: 'Chilonzor 9-12',
       item: 'Shakar, Un, Yog\'',
       qty: 500,
@@ -359,10 +359,10 @@ export const MOCK_ALERTS: PriceAlert[] = [
 ];
 
 export const MOCK_USER_PROFILE = {
-  shopName: 'Dilshod Baqqollik',
-  ownerName: 'Dilshod Rustamov',
+  shopName: "Do'konim",
+  ownerName: "Do'kondor",
   phone: '+998 90 980 12 34',
-  address: 'Toshkent sh., Chilonzor tumani, 9-mavze, 12-uy',
+  address: 'Toshkent sh., Chilonzor tumani, 9-mavze',
   joinedPoolsCount: 14,
   totalSavedUZS: 8450000,
   bozorCoins: 12500,
@@ -370,17 +370,17 @@ export const MOCK_USER_PROFILE = {
 };
 
 export const DEMO_SHOP_PROFILE = {
-  name: 'Dilshod Rustamov',
-  shopName: 'Dilshod Baqqollik',
-  district: 'Chilonzor 9-mavze',
-  phone: '+998 90 980 12 34'
+  name: '',
+  shopName: '',
+  district: 'Chilonzor tumani',
+  phone: ''
 };
 
 export const DEMO_SUPPLIER_PROFILE = {
-  name: 'Elyor Aka',
-  companyName: 'Elyor Baraka Optom',
-  marketLocation: "O'rikzor bozori, 4-blok, 12-ombor",
-  phone: '+998 93 555 12 88',
+  name: '',
+  companyName: '',
+  marketLocation: "O'rikzor bozori",
+  phone: '',
   verified: true,
   rating: 4.9
 };

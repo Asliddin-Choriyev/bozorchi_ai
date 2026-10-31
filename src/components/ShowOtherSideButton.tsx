@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserRole, Language } from '../types';
+import { UserRole, Language, ShopOwnerProfile, SupplierProfile } from '../types';
 import { translations } from '../i18n';
 import { ArrowLeftRight, Store, Truck } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
@@ -8,14 +8,24 @@ interface Props {
   activeRole: UserRole;
   onToggleRole: () => void;
   lang: Language;
+  shopProfile?: ShopOwnerProfile;
+  supplierProfile?: SupplierProfile;
 }
 
-export const ShowOtherSideButton: React.FC<Props> = ({ activeRole, onToggleRole, lang }) => {
+export const ShowOtherSideButton: React.FC<Props> = ({
+  activeRole,
+  onToggleRole,
+  lang,
+  shopProfile,
+  supplierProfile
+}) => {
   const t = translations[lang];
 
   if (activeRole === 'unselected') return null;
 
   const isShop = activeRole === 'shop_owner';
+  const supLabel = supplierProfile?.name ? `(${supplierProfile.name})` : '';
+  const shopLabel = shopProfile?.name ? `(${shopProfile.name})` : '';
 
   return (
     <div className="fixed bottom-[60px] left-0 right-0 z-40 pointer-events-none px-3">
@@ -38,12 +48,12 @@ export const ShowOtherSideButton: React.FC<Props> = ({ activeRole, onToggleRole,
               {isShop ? (
                 <>
                   <Truck className="w-3.5 h-3.5" />
-                  <span>Ta'minotchi (Elyor)</span>
+                  <span>Ta'minotchi {supLabel}</span>
                 </>
               ) : (
                 <>
                   <Store className="w-3.5 h-3.5" />
-                  <span>Do'kondor (Dilshod)</span>
+                  <span>Do'kondor {shopLabel}</span>
                 </>
               )}
             </span>

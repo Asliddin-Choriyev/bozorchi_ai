@@ -8,9 +8,10 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   lang: Language;
+  userName?: string;
 }
 
-export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang }) => {
+export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, userName }) => {
   const [messages, setMessages] = useState<
     { sender: 'user' | 'ai'; text: string; time: string }[]
   >([
@@ -18,10 +19,10 @@ export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang }) =>
       sender: 'ai',
       text:
         lang === 'uz'
-          ? "Assalomu alaykum, Dilshod aka! Men Bozorchi AI — Toshkent ulgurji bozorlari bo'yicha shaxsiy maslahatchingizman. Qaysi mahsulot yoki bozor narxi haqida bilmoqchisiz?"
+          ? `Assalomu alaykum${userName ? `, ${userName}` : ''}! Men Bozorchi AI — Toshkent ulgurji bozorlari bo'yicha shaxsiy maslahatchingizman. Qaysi mahsulot yoki bozor narxi haqida bilmoqchisiz?`
           : lang === 'ru'
-          ? "Здравствуйте! Я Bozorchi AI — ваш оптовый ассистент по рынкам Ташкента. Спросите меня о ценах на сахар, муку или пуле Чиланзар-9!"
-          : "Hello! I am Bozorchi AI, your Tashkent wholesale advisor. Ask me anything about bazaar trends, sugar prices, or the Chilonzor-9 pool!",
+          ? `Здравствуйте${userName ? `, ${userName}` : ''}! Я Bozorchi AI — ваш оптовый ассистент по рынкам Ташкента. Спросите меня о ценах на сахар, муку или пуле Чиланзар-9!`
+          : `Hello${userName ? `, ${userName}` : ''}! I am Bozorchi AI, your Tashkent wholesale advisor. Ask me anything about bazaar trends, sugar prices, or the Chilonzor-9 pool!`,
       time: '12:00',
     },
   ]);

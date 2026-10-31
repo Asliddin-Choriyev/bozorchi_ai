@@ -1,5 +1,5 @@
 import React from 'react';
-import { Language, SupplierScreenType } from '../types';
+import { Language, SupplierScreenType, SupplierProfile } from '../types';
 import { ArrowLeft, Sparkles, ShieldCheck, Truck } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
@@ -9,6 +9,7 @@ interface Props {
   lang: Language;
   onLanguageChange: (lang: Language) => void;
   screenTitle?: string;
+  profile?: SupplierProfile;
   onOpenAI?: () => void;
 }
 
@@ -18,9 +19,13 @@ export const SupplierHeader: React.FC<Props> = ({
   lang,
   onLanguageChange,
   screenTitle,
+  profile,
   onOpenAI
 }) => {
   const showBack = currentScreen === 'order_detail' || currentScreen === 'supplier_result';
+
+  const defaultTitle = profile?.companyName || profile?.name || 'Ulgurji Baza';
+  const defaultLocation = profile?.marketLocation || "O'rikzor 4-blok";
 
   return (
     <header className="sticky top-0 z-40 bg-[#0A1714] text-white px-4 py-3 shadow-md border-b border-gold-highlight/30">
@@ -47,7 +52,7 @@ export const SupplierHeader: React.FC<Props> = ({
 
           <div>
             <h1 className="font-serif font-bold text-base leading-tight tracking-wide flex items-center gap-1.5 text-white">
-              {screenTitle ? screenTitle : 'Elyor Baraka Optom'}
+              {screenTitle ? screenTitle : defaultTitle}
               {!screenTitle && (
                 <span className="inline-flex items-center gap-0.5 text-[9px] uppercase font-sans tracking-wider bg-gold-highlight/20 text-gold-highlight px-1.5 py-0.5 rounded font-bold border border-gold-highlight/40">
                   <ShieldCheck className="w-3 h-3 text-gold-highlight" />
@@ -56,7 +61,7 @@ export const SupplierHeader: React.FC<Props> = ({
               )}
             </h1>
             <p className="text-[11px] text-[#A6B8B4] leading-none">
-              O'rikzor 4-blok • Ta'minotchi Portali
+              {defaultLocation} • Ta'minotchi Portali
             </p>
           </div>
         </div>

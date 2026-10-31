@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Language } from '../types';
+import { Language, ShopOwnerProfile } from '../types';
 import { translations } from '../i18n';
 import { MOCK_USER_PROFILE } from '../data/mock';
 import { formatUZS } from '../utils/format';
@@ -12,13 +12,20 @@ interface Props {
   onLanguageChange: (lang: Language) => void;
   onOpenAI?: () => void;
   onSwitchRole?: () => void;
+  profile?: ShopOwnerProfile;
 }
 
-export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenAI, onSwitchRole }) => {
+export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenAI, onSwitchRole, profile }) => {
   const t = translations[lang];
   const [apiKeyInput, setApiKeyInput] = useState(getOpenAIApiKey());
   const [keySaved, setKeySaved] = useState(false);
   const isKeyActive = hasActiveAIKey();
+
+  const currentShopName = profile?.shopName || profile?.name || MOCK_USER_PROFILE.shopName;
+  const currentOwnerName = profile?.name || MOCK_USER_PROFILE.ownerName;
+  const currentDistrict = profile?.district || MOCK_USER_PROFILE.address;
+  const currentPhone = profile?.phone || MOCK_USER_PROFILE.phone;
+  const avatarLetter = (currentShopName || currentOwnerName || 'D')[0].toUpperCase();
 
   const handleSaveKey = () => {
     triggerHaptic('success');
@@ -33,7 +40,7 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
       <div className="bg-cream-card rounded-card p-4 border border-[#E3D9C4] shadow-card">
         <div className="flex items-center gap-3">
           <div className="w-14 h-14 rounded-2xl bg-teal-action text-white flex items-center justify-center font-serif font-black text-2xl shadow-sm">
-            D
+            {avatarLetter}
           </div>
           <div>
             <div className="inline-flex items-center gap-1 text-[10px] font-bold text-[#167E51] bg-[#EBF7F0] px-2 py-0.5 rounded-full border border-[#167E51]/20">
@@ -41,10 +48,10 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
               <span>Tasdiqlangan baqqol</span>
             </div>
             <h2 className="font-serif font-bold text-lg text-ink leading-tight mt-1">
-              {MOCK_USER_PROFILE.shopName}
+              {currentShopName}
             </h2>
             <p className="text-xs text-ink-muted">
-              {MOCK_USER_PROFILE.ownerName}
+              {currentOwnerName}
             </p>
           </div>
         </div>
@@ -52,11 +59,11 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
         <div className="mt-3.5 pt-3 border-t border-[#EDE4D0] space-y-2 text-xs">
           <div className="flex items-center gap-2 text-ink-muted">
             <MapPin className="w-3.5 h-3.5 text-teal-action shrink-0" />
-            <span>{MOCK_USER_PROFILE.address}</span>
+            <span>{currentDistrict}</span>
           </div>
           <div className="flex items-center gap-2 text-ink-muted">
             <Phone className="w-3.5 h-3.5 text-teal-action shrink-0" />
-            <span>{MOCK_USER_PROFILE.phone}</span>
+            <span>{currentPhone}</span>
           </div>
         </div>
       </div>
