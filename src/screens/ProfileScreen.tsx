@@ -157,13 +157,13 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
                 : 'bg-[#FCF5E2] text-[#8C6D1F] border-[#E3B341]/30'
             }`}
           >
-            {isKeyActive ? '● ChatGPT Live' : '○ Smart Demo'}
+            {isKeyActive ? '● Bozorchi AI Live' : '○ Smart Demo'}
           </span>
         </div>
 
         <div>
           <label className="block text-[10px] font-bold text-ink-muted uppercase tracking-wider mb-1">
-            OpenAI API Token (sk-...):
+            Bozorchi AI Token (sk-...):
           </label>
           <div className="flex items-center gap-1.5">
             <input

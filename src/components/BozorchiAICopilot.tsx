@@ -93,7 +93,7 @@ export const BozorchiAICopilot: React.FC<Props> = ({ isOpen, onClose, lang, user
               <div className="flex items-center gap-1.5">
                 <h3 className="font-serif font-bold text-sm">Bozorchi AI Copilot</h3>
                 <span className="text-[9px] bg-white/20 text-[#E3B341] font-bold px-1.5 py-0.2 rounded">
-                  {isLiveKey ? 'ChatGPT Live' : 'AI Assistant'}
+                  {isLiveKey ? 'Bozorchi AI Live' : 'AI Assistant'}
                 </span>
               </div>
               <p className="text-[10px] text-[#CFEBE6]">{t.copilot.subtitle}</p>

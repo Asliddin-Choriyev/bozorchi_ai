@@ -110,7 +110,7 @@ Creates an optimized static bundle in `/dist` ready for static hosting.
 
 ---
 
-## 2. OpenAI / ChatGPT Integration (Optional)
+## 2. Bozorchi AI Engine Integration (Optional)
 
 BozorNarx includes two AI features powered by OpenAI `gpt-4o-mini`:
 1. **BozorVision OCR**: Reads photos of handwritten or printed paper invoices taken with the phone camera, extracts line items & prices, and verifies whether they match the locked pool quote.
