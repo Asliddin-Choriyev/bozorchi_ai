@@ -109,9 +109,33 @@ Creates an optimized static bundle in `/dist` ready for static hosting.
 
 ---
 
-## 2. Deploy Free to Netlify or GitHub Pages (HTTPS Required)
+## 2. Deploy to Vercel via GitHub (Recommended & Automated HTTPS)
 
-Telegram Mini Apps strictly require **HTTPS**. Both Netlify and GitHub Pages provide free automated HTTPS.
+Telegram Mini Apps strictly require **HTTPS**. Vercel gives you instant automatic SSL certificates, fast global CDN edge delivery, and automatic deployments whenever you push commits to GitHub.
+
+### Step 1: Push Local Code to GitHub
+1. Create a new repository on [GitHub](https://github.com/new) named `bozornarx` (keep it Public or Private, leave "Add README" unchecked).
+2. In PowerShell, link your repository and push:
+   ```powershell
+   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/bozornarx.git
+   git push -u origin main
+   ```
+
+### Step 2: Import & Deploy on Vercel
+1. Go to [https://vercel.com/new](https://vercel.com/new) and log in with your GitHub account.
+2. Under **"Import Git Repository"**, find `bozornarx` and click **"Import"**.
+3. Vercel automatically detects the Vite framework with preset settings:
+   - **Framework Preset:** `Vite`
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+4. Click **"Deploy"**. Within ~30 seconds, Vercel will complete the build and assign you a live HTTPS domain, for example:
+   `https://bozornarx.vercel.app`
+
+*(Note: We have also included `vercel.json` with client-side SPA routing rewrites so any page refresh loads seamlessly).*
+
+---
+
+## 3. Alternative Free Deployments (Netlify or GitHub Pages)
 
 ### Option A: Free Deployment via Netlify (Recommended - 2 Minutes)
 1. Build the production files:
