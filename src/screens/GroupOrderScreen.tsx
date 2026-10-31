@@ -246,7 +246,7 @@ export const GroupOrderScreen: React.FC<Props> = ({
       <div className="bg-[#FAF6EC] border border-[#E7D6A7] rounded-xl p-3 flex items-start gap-2.5">
         <ShieldCheck className="w-5 h-5 text-teal-action shrink-0 mt-0.5" />
         <div className="text-xs text-ink-muted leading-snug">
-          <strong className="text-ink font-bold block mb-0.5">BozorNarx Xavfsiz Eskrou kafolati:</strong>
+          <strong className="text-ink font-bold block mb-0.5">Bozorchi AI Xavfsiz Eskrou kafolati:</strong>
           {t.groupOrder.escrowSafety}
         </div>
       </div>

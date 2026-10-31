@@ -1,6 +1,6 @@
 """
-BozorNarx Telegram Bot Companion
-Allows opening the BozorNarx Telegram Mini App directly from Telegram.
+Bozorchi AI Telegram Bot Companion
+Allows opening the Bozorchi AI Telegram Mini App directly from Telegram.
 
 Setup:
 1. Create a bot in @BotFather, get BOT_TOKEN
@@ -18,14 +18,14 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN_HERE")
-WEBAPP_URL = os.getenv("WEBAPP_URL", "https://bozornarx.netlify.app")
+WEBAPP_URL = os.getenv("WEBAPP_URL", "https://bozorchi-ai.vercel.app")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name if update.effective_user else "Baqqol"
     keyboard = [
         [
             InlineKeyboardButton(
-                "🛒 BozorNarx Mini App-ni ochish",
+                "🛒 Bozorchi AI Mini App-ni ochish",
                 web_app=WebAppInfo(url=WEBAPP_URL)
             )
         ],
@@ -40,11 +40,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     await update.message.reply_text(
         f"Assalomu alaykum, {user_name}!\n\n"
-        f"**BozorNarx** — Toshkentdagi baqqollik do'konlari uchun ulgurji narxlar taxtasi "
+        f"**Bozorchi AI** — Toshkentdagi baqqollik do'konlari uchun ulgurji narxlar taxtasi "
         f"va birgalikda xarid (pooling) platformasiga xush kelibsiz.\n\n"
         f"📊 Bozor narxlarini solishtiring (O'rikzor, Food City, Chorsu)\n"
         f"👥 Chilonzor-9 klasterida qo'shnilaringiz bilan arzon narxga birlashing\n"
-        f"📷 Fakturani BozorVision orqali skanerlang va BozorCoin oling\n\n"
+        f"📷 Fakturani BozorVision AI orqali skanerlang va BozorCoin oling\n\n"
         f"Ilovani ishga tushirish uchun quyidagi tugmani bosing 👇",
         reply_markup=reply_markup,
         parse_mode="Markdown"
@@ -57,7 +57,7 @@ def main():
 
     app = Application.builder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
-    print(f"[*] BozorNarx bot ishga tushdi... WebApp URL: {WEBAPP_URL}")
+    print(f"[*] Bozorchi AI bot ishga tushdi... WebApp URL: {WEBAPP_URL}")
     app.run_polling()
 
 if __name__ == "__main__":

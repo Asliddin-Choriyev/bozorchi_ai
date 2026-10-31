@@ -16,13 +16,13 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart }) => {
   const { oldWay, pooledWay, savings } = REAL_DECK_NUMBERS;
   const [copied, setCopied] = useState(false);
 
-  const shareText = `📊 BozorNarx bilan xarid natijam:\n💰 1 840 000 UZS tejaldi (-11.7%)\n⏱ 15 soat 45 daqiqa tejaldi!\nJami: 13 890 000 UZS (oldin 15 730 000 UZS edi).\nChilonzor-9 klasterida birgalikda xarid qildik! 🚀`;
+  const shareText = `📊 Bozorchi AI bilan xarid natijam:\n💰 1 840 000 UZS tejaldi (-11.7%)\n⏱ 15 soat 45 daqiqa tejaldi!\nJami: 13 890 000 UZS (oldin 15 730 000 UZS edi).\nChilonzor-9 klasterida birgalikda xarid qildik! 🚀`;
 
   const handleShare = () => {
     triggerHaptic('success');
     if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
       try {
-        const tgUrl = `https://t.me/share/url?url=${encodeURIComponent('https://t.me/BozorNarxBot')}&text=${encodeURIComponent(shareText)}`;
+        const tgUrl = `https://t.me/share/url?url=${encodeURIComponent('https://t.me/BozorchiAiBot')}&text=${encodeURIComponent(shareText)}`;
         window.Telegram.WebApp.openTelegramLink(tgUrl);
         return;
       } catch (e) {
@@ -74,7 +74,7 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart }) => {
       {/* Before vs After Side-by-Side Comparison */}
       <div className="bg-cream-card rounded-card p-4 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-sm text-ink mb-3 text-center">
-          Yakka xarid vs BozorNarx Guruh Xaridi
+          Yakka xarid vs Bozorchi AI Guruh Xaridi
         </h3>
 
         <div className="space-y-3 text-xs">
@@ -183,7 +183,7 @@ export const SavingsResultScreen: React.FC<Props> = ({ lang, onRestart }) => {
               </span>
             </div>
             <div className="flex justify-between items-center text-base">
-              <span className="font-serif font-extrabold text-teal-action">BozorNarx bilan:</span>
+              <span className="font-serif font-extrabold text-teal-action">Bozorchi AI bilan:</span>
               <span className="font-serif font-black text-teal-action text-lg">
                 {formatUZS(pooledWay.totalCost)} (15 daqiqa)
               </span>

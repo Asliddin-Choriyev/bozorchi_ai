@@ -16,7 +16,7 @@ export const SampleDataFooter: React.FC<Props> = ({ lang }) => {
           {t.priceBoard.disclaimer}
         </p>
         <p className="text-[9px] text-[#8C7D68] mt-0.5">
-          BozorNarx v1.0 • Lumora Competition Demo • Tashkent 2026
+          Bozorchi AI v1.0 • Lumora Competition Demo • Tashkent 2026
         </p>
       </div>
     </footer>

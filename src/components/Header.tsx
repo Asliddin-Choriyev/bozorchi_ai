@@ -49,7 +49,7 @@ export const Header: React.FC<Props> = ({
 
           <div>
             <h1 className="font-serif font-bold text-base leading-tight tracking-wide flex items-center gap-1.5">
-              {screenTitle ? screenTitle : 'BozorNarx'}
+              {screenTitle ? screenTitle : 'Bozorchi AI'}
               {!screenTitle && (
                 <span className="text-[10px] uppercase font-sans tracking-wider bg-[#E3B341]/20 text-[#E3B341] px-1.5 py-0.5 rounded font-bold border border-[#E3B341]/40">
                   Tashkent

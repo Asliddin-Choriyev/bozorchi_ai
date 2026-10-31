@@ -1,7 +1,8 @@
-# BozorNarx — Telegram Mini App (Toshkent Ulgurji Bozorlari & Birgalikda Xarid)
+# Bozorchi AI — Telegram Mini App (Toshkent Ulgurji Bozorlari & Birgalikda Xarid)
 
 > **Competition Demo Prototype for Lumora IT Case Competition**  
-> A wholesale price board, supplier comparison engine, and neighborhood group-buying (pooling) tool for small grocery shops in Tashkent, Uzbekistan.
+> A wholesale price board, supplier comparison engine, AI invoice verifier, and neighborhood group-buying (pooling) tool for small grocery shops in Tashkent, Uzbekistan.
+> GitHub: [https://github.com/Asliddin-Choriyev/bozorchi_ai](https://github.com/Asliddin-Choriyev/bozorchi_ai)
 
 ---
 
@@ -11,7 +12,7 @@
 > *"Every morning at 4:00 AM, Dilshod from Chilonzor drives to O'rikzor, burns 16 hours a week, and pays 15.7 million UZS solo for standard stock."*
 >
 > **Line 2 (The Price Board & Fair Corridor):**  
-> *"With BozorNarx, he opens Telegram, searches 'sugar 500 kg', checks verified prices across Chorsu, O'rikzor, and Food City, and sees the official fair corridor."*
+> *"With Bozorchi AI, he opens Telegram, searches 'sugar 500 kg', checks verified prices across Chorsu, O'rikzor, and Food City, and sees the official fair corridor."*
 >
 > **Line 3 (The Pooling Power):**  
 > *"Instead of paying 12,800 UZS solo, Dilshod joins the 5-shop 'Chilonzor-9' cluster pool with one tap, locking in Tier 1 bulk pricing at 11,400 UZS/kg."*
@@ -26,7 +27,7 @@
 
 ## Real Pitch Deck Numbers
 
-| Metric | Old Solo Way | Pooled Way (BozorNarx) | Savings |
+| Metric | Old Solo Way | Pooled Way (Bozorchi AI) | Savings |
 | :--- | :--- | :--- | :--- |
 | **Sugar (500 kg)** | 12,800 UZS = 6,400,000 UZS | 11,400 UZS = 5,700,000 UZS | **-700,000 UZS** |
 | **Flour (15 bags × 50kg)** | 280,000 UZS = 4,200,000 UZS | 255,000 UZS = 3,825,000 UZS | **-375,000 UZS** |
@@ -127,22 +128,24 @@ BozorNarx includes two AI features powered by OpenAI `gpt-4o-mini`:
 Telegram Mini Apps strictly require **HTTPS**. Vercel gives you instant automatic SSL certificates, fast global CDN edge delivery, and automatic deployments whenever you push commits to GitHub.
 
 ### Step 1: Push Local Code to GitHub
-1. Create a new repository on [GitHub](https://github.com/new) named `bozornarx` (keep it Public or Private, leave "Add README" unchecked).
-2. In PowerShell, link your repository and push:
-   ```powershell
-   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/bozornarx.git
-   git push -u origin main
-   ```
+Your repository is connected to:
+`https://github.com/Asliddin-Choriyev/bozorchi_ai.git`
+
+In PowerShell, push the code:
+```powershell
+git push -u origin main
+```
 
 ### Step 2: Import & Deploy on Vercel
 1. Go to [https://vercel.com/new](https://vercel.com/new) and log in with your GitHub account.
-2. Under **"Import Git Repository"**, find `bozornarx` and click **"Import"**.
+2. Under **"Import Git Repository"**, find `bozorchi_ai` and click **"Import"**.
 3. Vercel automatically detects the Vite framework with preset settings:
    - **Framework Preset:** `Vite`
    - **Build Command:** `npm run build`
    - **Output Directory:** `dist`
-4. Click **"Deploy"**. Within ~30 seconds, Vercel will complete the build and assign you a live HTTPS domain, for example:
-   `https://bozornarx.vercel.app`
+4. *(Optional)* In **Environment Variables**, add `VITE_OPENAI_API_KEY` with your OpenAI token.
+5. Click **"Deploy"**. Within ~30 seconds, Vercel will complete the build and assign you a live HTTPS domain, for example:
+   `https://bozorchi-ai.vercel.app`
 
 *(Note: We have also included `vercel.json` with client-side SPA routing rewrites so any page refresh loads seamlessly).*
 

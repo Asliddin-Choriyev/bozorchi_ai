@@ -178,7 +178,7 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
       <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
         <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider mb-1 flex items-center gap-1.5">
           <HelpCircle className="w-3.5 h-3.5 text-teal-action" />
-          <span>BozorNarx haqida</span>
+          <span>Bozorchi AI haqida</span>
         </h3>
         <p className="text-xs text-ink-muted leading-relaxed">
           Toshkentdagi kichik baqqollik va minimarketlar uchun ulgurji narxlar axboroti hamda mahalliy birgalikda xarid (pooling) tizimi.

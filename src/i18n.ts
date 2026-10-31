@@ -2,7 +2,7 @@ import { Language } from './types';
 
 export const translations = {
   uz: {
-    appTitle: 'BozorNarx',
+    appTitle: 'Bozorchi AI',
     appSubtitle: 'Toshkent Ulgurji Narxlari & Birgalikda Xarid',
     tabs: {
       prices: 'Narxlar',
@@ -98,7 +98,7 @@ export const translations = {
       highlightSaved: '1 840 000 UZS tejaldi (-11.7%)',
       timeSaved: '15 soat 45 daqiqa vaqt tejaldi',
       oldWayTitle: 'Oldingi yakka usul',
-      pooledWayTitle: 'BozorNarx guruhi bilan',
+      pooledWayTitle: 'Bozorchi AI guruhi bilan',
       sugarRow: 'Shakar (500 kg):',
       flourRow: 'Un (15 qop):',
       oilRow: 'Yog\' (60 dona):',
@@ -125,7 +125,7 @@ export const translations = {
     }
   },
   ru: {
-    appTitle: 'BozorNarx',
+    appTitle: 'Bozorchi AI',
     appSubtitle: 'Оптовые цены Ташкента и Совместные закупки',
     tabs: {
       prices: 'Цены',
@@ -221,7 +221,7 @@ export const translations = {
       highlightSaved: 'Сэкономлено 1 840 000 UZS (-11.7%)',
       timeSaved: 'Сэкономлено 15 часов 45 минут',
       oldWayTitle: 'Старый способ (в одиночку)',
-      pooledWayTitle: 'С пулом BozorNarx',
+      pooledWayTitle: 'С пулом Bozorchi AI',
       sugarRow: 'Сахар (500 кг):',
       flourRow: 'Мука (15 мешков):',
       oilRow: 'Масло (60 бут):',
@@ -248,7 +248,7 @@ export const translations = {
     }
   },
   en: {
-    appTitle: 'BozorNarx',
+    appTitle: 'Bozorchi AI',
     appSubtitle: 'Tashkent Wholesale Price Board & Group Buy',
     tabs: {
       prices: 'Prices',
@@ -344,7 +344,7 @@ export const translations = {
       highlightSaved: 'Saved 1,840,000 UZS (-11.7%)',
       timeSaved: 'Saved 15 hours 45 minutes',
       oldWayTitle: 'Old way (Solo drive to market)',
-      pooledWayTitle: 'Pooled way with BozorNarx',
+      pooledWayTitle: 'Pooled way with Bozorchi AI',
       sugarRow: 'Sugar (500 kg):',
       flourRow: 'Flour (15 bags):',
       oilRow: 'Cooking oil (60 bottles):',
