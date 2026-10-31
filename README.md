@@ -109,7 +109,20 @@ Creates an optimized static bundle in `/dist` ready for static hosting.
 
 ---
 
-## 2. Deploy to Vercel via GitHub (Recommended & Automated HTTPS)
+## 2. OpenAI / ChatGPT Integration (Optional)
+
+BozorNarx includes two AI features powered by OpenAI `gpt-4o-mini`:
+1. **BozorVision OCR**: Reads photos of handwritten or printed paper invoices taken with the phone camera, extracts line items & prices, and verifies whether they match the locked pool quote.
+2. **Bozorchi AI Copilot**: A wholesale trading advisor accessible from the header `AI` button or Profile tab that advises shop owners on Tashkent bazaar trends and drafts supplier orders.
+
+### How to Activate:
+- **In Vercel / Locally**: Add `VITE_OPENAI_API_KEY=sk-...` to your `.env` or Vercel Environment Variables.
+- **In the App**: Go to the **Profile** tab -> **Sun'iy Intellekt (OpenAI)** -> paste your API key and tap **Saqlash**.
+- *Fail-Safe Guarantee:* If no key is provided, the app automatically runs in **Smart Demo Mode** with deterministic responses so live pitches never fail or crash!
+
+---
+
+## 3. Deploy to Vercel via GitHub (Recommended & Automated HTTPS)
 
 Telegram Mini Apps strictly require **HTTPS**. Vercel gives you instant automatic SSL certificates, fast global CDN edge delivery, and automatic deployments whenever you push commits to GitHub.
 

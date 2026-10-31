@@ -10,6 +10,7 @@ interface Props {
   onLanguageChange: (lang: Language) => void;
   screenTitle?: string;
   isTelegram: boolean;
+  onOpenAI?: () => void;
 }
 
 export const Header: React.FC<Props> = ({
@@ -18,7 +19,8 @@ export const Header: React.FC<Props> = ({
   lang,
   onLanguageChange,
   screenTitle,
-  isTelegram
+  isTelegram,
+  onOpenAI
 }) => {
   const showBack = currentScreen !== 'price_board' && currentScreen !== 'profile' && currentScreen !== 'alerts' && currentScreen !== 'group_order';
 
@@ -60,8 +62,22 @@ export const Header: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* Language switcher & Telegram Indicator */}
-        <div className="flex items-center gap-1">
+        {/* Bozorchi AI Button & Language switcher */}
+        <div className="flex items-center gap-1.5">
+          {onOpenAI && (
+            <button
+              onClick={() => {
+                triggerHaptic('medium');
+                onOpenAI();
+              }}
+              title="Bozorchi AI Maslahatchi"
+              className="min-h-[36px] px-2 rounded-lg bg-[#E3B341] text-[#0A1714] font-bold text-xs flex items-center gap-1 shadow-sm active:scale-95 transition-all"
+            >
+              <Sparkles className="w-3.5 h-3.5 fill-[#0A1714]" />
+              <span className="hidden xs:inline">AI</span>
+            </button>
+          )}
+
           <div className="flex items-center bg-[#08534C] p-0.5 rounded-lg border border-white/10 text-xs">
             {(['uz', 'ru', 'en'] as Language[]).map((l) => (
               <button

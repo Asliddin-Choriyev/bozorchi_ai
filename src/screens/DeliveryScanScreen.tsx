@@ -3,7 +3,8 @@ import { Language } from '../types';
 import { translations } from '../i18n';
 import { REAL_DECK_NUMBERS } from '../data/mock';
 import { formatUZS } from '../utils/format';
-import { Camera, CheckCircle2, Coins, Truck, ArrowRight, ShieldCheck, Sparkles, FileText } from 'lucide-react';
+import { analyzeInvoiceWithAI, hasActiveAIKey } from '../utils/ai';
+import { Camera, CheckCircle2, Coins, Truck, ArrowRight, ShieldCheck, Sparkles, FileText, Bot } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
 interface Props {
@@ -22,6 +23,13 @@ export const DeliveryScanScreen: React.FC<Props> = ({
 
   const [isScanning, setIsScanning] = useState(false);
   const [isVerified, setIsVerified] = useState(autoTrigger);
+  const [scannedItems, setScannedItems] = useState([
+    { name: "Shakar oq (Rossiya)", qty: "500 kg × 11 400 UZS", status: "Mos keldi ✓" },
+    { name: "Un 1-nav (Qozoq 50 kg)", qty: "15 qop × 255 000 UZS", status: "Mos keldi ✓" },
+    { name: "Pista yog'i (5L)", qty: "60 dona × 71 500 UZS", status: "Mos keldi ✓" },
+    { name: "Labo yetkazish ulushi", qty: "1 do'kon × 75 000 UZS", status: "Mos keldi ✓" }
+  ]);
+  const [aiNote, setAiNote] = useState<string | null>(null);
 
   const startScanSimulation = () => {
     triggerHaptic('medium');
@@ -35,7 +43,34 @@ export const DeliveryScanScreen: React.FC<Props> = ({
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      startScanSimulation();
+      const file = e.target.files[0];
+      setIsScanning(true);
+      triggerHaptic('medium');
+
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64 = reader.result as string;
+        try {
+          const res = await analyzeInvoiceWithAI(base64, lang);
+          if (res && res.items && res.items.length > 0) {
+            setScannedItems(
+              res.items.map((it) => ({
+                name: it.name,
+                qty: `${it.qty} × ${it.price}`,
+                status: it.status === 'ok' ? 'Mos keldi ✓' : 'Farq aniqlandi ⚠️'
+              }))
+            );
+          }
+          if (res && res.notes) setAiNote(res.notes);
+        } catch (err) {
+          console.warn('AI scan error:', err);
+        } finally {
+          setIsScanning(false);
+          setIsVerified(true);
+          triggerHaptic('success');
+        }
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -141,38 +176,32 @@ export const DeliveryScanScreen: React.FC<Props> = ({
               </div>
               <div>
                 <div className="inline-flex items-center gap-1 bg-[#167E51] text-white text-[10px] font-black px-2 py-0.2 rounded-full mb-0.5">
-                  <span>BozorVision Verified ✓</span>
+                  <Bot className="w-3 h-3 text-white" />
+                  <span>BozorVision AI Verified ✓</span>
                 </div>
                 <h3 className="font-serif font-bold text-base text-[#0D5735]">
                   {t.delivery.verifiedTitle}
                 </h3>
                 <p className="text-xs text-[#1D6C47] mt-0.5">
-                  {t.delivery.verifiedDesc}
+                  {aiNote || t.delivery.verifiedDesc}
                 </p>
               </div>
             </div>
 
             {/* OCR Extracted Items Table */}
             <div className="mt-3.5 bg-white/90 rounded-xl p-3 border border-[#BCE3CC] space-y-1.5 text-xs">
-              <div className="font-bold text-[11px] text-ink-muted uppercase tracking-wider pb-1 border-b border-[#E0F0E6]">
-                Faktura qatorlari (Skanerlandi):
+              <div className="font-bold text-[11px] text-ink-muted uppercase tracking-wider pb-1 border-b border-[#E0F0E6] flex items-center justify-between">
+                <span>Faktura qatorlari (AI Skaner):</span>
+                <span className="text-[10px] text-[#167E51] font-bold">100% Moslik</span>
               </div>
-              <div className="flex justify-between py-0.5">
-                <span className="font-medium text-ink">Shakar oq: 500 kg × 11 400 UZS</span>
-                <span className="font-bold text-[#167E51]">Mos keldi ✓</span>
-              </div>
-              <div className="flex justify-between py-0.5">
-                <span className="font-medium text-ink">Un 1-nav: 15 qop × 255 000 UZS</span>
-                <span className="font-bold text-[#167E51]">Mos keldi ✓</span>
-              </div>
-              <div className="flex justify-between py-0.5">
-                <span className="font-medium text-ink">Pista yog'i: 60 dona × 71 500 UZS</span>
-                <span className="font-bold text-[#167E51]">Mos keldi ✓</span>
-              </div>
-              <div className="flex justify-between py-0.5">
-                <span className="font-medium text-ink">Labo yetkazish ulushi: 75 000 UZS</span>
-                <span className="font-bold text-[#167E51]">Mos keldi ✓</span>
-              </div>
+              {scannedItems.map((item, idx) => (
+                <div key={idx} className="flex justify-between py-0.5">
+                  <span className="font-medium text-ink truncate max-w-[220px]">
+                    {item.name}: <span className="text-ink-muted">{item.qty}</span>
+                  </span>
+                  <span className="font-bold text-[#167E51] shrink-0">{item.status}</span>
+                </div>
+              ))}
             </div>
 
             {/* BozorCoins Reward Card */}

@@ -25,6 +25,7 @@ import { GroupOrderScreen } from './screens/GroupOrderScreen';
 import { DeliveryScanScreen } from './screens/DeliveryScanScreen';
 import { SavingsResultScreen } from './screens/SavingsResultScreen';
 import { ProfileScreen } from './screens/ProfileScreen';
+import { BozorchiAICopilot } from './components/BozorchiAICopilot';
 import {
   initTelegramApp,
   configureMainButton,
@@ -50,6 +51,7 @@ export const App: React.FC = () => {
   const [alerts, setAlerts] = useState<PriceAlert[]>(MOCK_ALERTS);
   const [selectedSupplier, setSelectedSupplier] = useState<Supplier | null>(null);
   const [isAutoDeliveryTriggered, setIsAutoDeliveryTriggered] = useState(false);
+  const [isAIOpen, setIsAIOpen] = useState(false);
 
   // Initialize Telegram WebApp on mount
   useEffect(() => {
@@ -190,6 +192,7 @@ export const App: React.FC = () => {
           onLanguageChange={setLang}
           screenTitle={getScreenTitle()}
           isTelegram={isTelegramWebApp()}
+          onOpenAI={() => setIsAIOpen(true)}
         />
 
         {/* Main Screen Content */}
@@ -271,12 +274,20 @@ export const App: React.FC = () => {
             <ProfileScreen
               lang={lang}
               onLanguageChange={setLang}
+              onOpenAI={() => setIsAIOpen(true)}
             />
           )}
 
           {/* Sample Data Disclaimer Footer */}
           <SampleDataFooter lang={lang} />
         </main>
+
+        {/* Bozorchi AI Copilot Sheet */}
+        <BozorchiAICopilot
+          isOpen={isAIOpen}
+          onClose={() => setIsAIOpen(false)}
+          lang={lang}
+        />
 
         {/* Bottom Navigation Bar */}
         <BottomNav

@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Language } from '../types';
 import { translations } from '../i18n';
 import { MOCK_USER_PROFILE } from '../data/mock';
 import { formatUZS } from '../utils/format';
-import { Store, ShieldCheck, Coins, Award, MapPin, Phone, HelpCircle } from 'lucide-react';
+import { getOpenAIApiKey, saveOpenAIApiKey, hasActiveAIKey } from '../utils/ai';
+import { Store, ShieldCheck, Coins, Award, MapPin, Phone, HelpCircle, Bot, Key, Check, Sparkles } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
 interface Props {
   lang: Language;
   onLanguageChange: (lang: Language) => void;
+  onOpenAI?: () => void;
 }
 
-export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange }) => {
+export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenAI }) => {
   const t = translations[lang];
+  const [apiKeyInput, setApiKeyInput] = useState(getOpenAIApiKey());
+  const [keySaved, setKeySaved] = useState(false);
+  const isKeyActive = hasActiveAIKey();
+
+  const handleSaveKey = () => {
+    triggerHaptic('success');
+    saveOpenAIApiKey(apiKeyInput);
+    setKeySaved(true);
+    setTimeout(() => setKeySaved(false), 2500);
+  };
 
   return (
     <div className="space-y-4 pb-12">
@@ -96,6 +108,70 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange }) => {
             </button>
           ))}
         </div>
+      </div>
+
+      {/* OpenAI AI Integration Card */}
+      <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card space-y-2.5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-gold-highlight text-ink flex items-center justify-center">
+              <Bot className="w-4 h-4 text-ink" />
+            </div>
+            <div>
+              <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider">
+                Sun'iy Intellekt (OpenAI)
+              </h3>
+              <p className="text-[10px] text-ink-muted">BozorVision va Bozorchi AI uchun</p>
+            </div>
+          </div>
+          <span
+            className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+              isKeyActive
+                ? 'bg-[#EBF7F0] text-[#167E51] border-[#167E51]/20'
+                : 'bg-[#FCF5E2] text-[#8C6D1F] border-[#E3B341]/30'
+            }`}
+          >
+            {isKeyActive ? '● ChatGPT Live' : '○ Smart Demo'}
+          </span>
+        </div>
+
+        <div>
+          <label className="block text-[10px] font-bold text-ink-muted uppercase tracking-wider mb-1">
+            OpenAI API Token (sk-...):
+          </label>
+          <div className="flex items-center gap-1.5">
+            <input
+              type="password"
+              value={apiKeyInput}
+              onChange={(e) => setApiKeyInput(e.target.value)}
+              placeholder="sk-proj-..."
+              className="flex-1 min-h-[40px] px-3 bg-white border border-[#DCD3BE] rounded-xl text-xs text-ink placeholder-ink-muted/50 focus:outline-none focus:ring-2 focus:ring-teal-action/40"
+            />
+            <button
+              onClick={handleSaveKey}
+              className="min-h-[40px] px-3 bg-teal-action hover:bg-teal-hover text-white font-bold text-xs rounded-xl flex items-center gap-1 active:scale-95 transition-all"
+            >
+              {keySaved ? <Check className="w-3.5 h-3.5" /> : <Key className="w-3.5 h-3.5" />}
+              <span>{keySaved ? 'Saqlandi' : 'Saqlash'}</span>
+            </button>
+          </div>
+          <p className="text-[10px] text-ink-muted mt-1 leading-tight">
+            Kalit kiritilsa, BozorVision fakturalarni bevosita GPT-4o-mini orqali tahlil qiladi. Kiritilmasa, barqaror demo rejim ishlaydi.
+          </p>
+        </div>
+
+        {onOpenAI && (
+          <button
+            onClick={() => {
+              triggerHaptic('medium');
+              onOpenAI();
+            }}
+            className="w-full min-h-[40px] bg-[#E8F3F1] hover:bg-[#D5EAE6] text-teal-action font-bold text-xs rounded-xl border border-teal-action/30 flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-gold-highlight fill-gold-highlight" />
+            <span>Bozorchi AI bilan suhbatlashish</span>
+          </button>
+        )}
       </div>
 
       {/* About App */}
