@@ -23,6 +23,7 @@ export const DeliveryScanScreen: React.FC<Props> = ({
 
   const [isScanning, setIsScanning] = useState(false);
   const [isVerified, setIsVerified] = useState(autoTrigger);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [scannedItems, setScannedItems] = useState([
     { name: "Shakar oq (Rossiya)", qty: "500 kg × 11 400 UZS", status: "Mos keldi ✓" },
     { name: "Un 1-nav (Qozoq 50 kg)", qty: "15 qop × 255 000 UZS", status: "Mos keldi ✓" },
@@ -50,6 +51,7 @@ export const DeliveryScanScreen: React.FC<Props> = ({
       const reader = new FileReader();
       reader.onload = async () => {
         const base64 = reader.result as string;
+        setUploadedImage(base64);
         try {
           const res = await analyzeInvoiceWithAI(base64, lang);
           if (res && res.items && res.items.length > 0) {
@@ -191,7 +193,7 @@ export const DeliveryScanScreen: React.FC<Props> = ({
             {/* OCR Extracted Items Table */}
             <div className="mt-3.5 bg-white/90 rounded-xl p-3 border border-[#BCE3CC] space-y-1.5 text-xs">
               <div className="font-bold text-[11px] text-ink-muted uppercase tracking-wider pb-1 border-b border-[#E0F0E6] flex items-center justify-between">
-                <span>Faktura qatorlari (AI Skaner):</span>
+                <span>Faktura qatorlari (AI OCR):</span>
                 <span className="text-[10px] text-[#167E51] font-bold">100% Moslik</span>
               </div>
               {scannedItems.map((item, idx) => (
@@ -203,6 +205,21 @@ export const DeliveryScanScreen: React.FC<Props> = ({
                 </div>
               ))}
             </div>
+
+            {/* Uploaded Image Preview if user took a real photo */}
+            {uploadedImage && (
+              <div className="mt-2.5 flex items-center gap-2.5 p-2 bg-white/80 rounded-xl border border-[#BCE3CC]">
+                <img
+                  src={uploadedImage}
+                  alt="Skanerlangan faktura"
+                  className="w-11 h-11 object-cover rounded-lg border border-[#A7D8BA] shadow-2xs"
+                />
+                <div className="text-xs">
+                  <span className="font-bold text-ink block leading-tight">Skanerlangan faktura rasmi</span>
+                  <span className="text-[10px] text-[#167E51] font-semibold">GPT-4o-mini Vision orqali tahlil qilindi</span>
+                </div>
+              </div>
+            )}
 
             {/* BozorCoins Reward Card */}
             <div className="mt-3 bg-gradient-to-r from-[#FFF5DB] to-[#FCEEC5] border border-gold-highlight rounded-xl p-3 flex items-center justify-between">
