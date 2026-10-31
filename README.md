@@ -223,3 +223,4 @@ Once you have your deployed HTTPS URL (e.g. `https://bozornarx-tashkent.netlify.
 - **Telegram SDK:** Native `MainButton`, `BackButton`, and `HapticFeedback` support with browser fallbacks.
 - **Languages:** Instant toggle between Uzbek (O'zbek), Russian (Русский), and English (EN).
 - **Demo Mode:** Floating 60-second tour button for judges to auto-fill and advance through the killer flow without dead ends.
+"# bozorchi_ai" 
