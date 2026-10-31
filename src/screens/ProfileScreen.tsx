@@ -11,9 +11,10 @@ interface Props {
   lang: Language;
   onLanguageChange: (lang: Language) => void;
   onOpenAI?: () => void;
+  onSwitchRole?: () => void;
 }
 
-export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenAI }) => {
+export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenAI, onSwitchRole }) => {
   const t = translations[lang];
   const [apiKeyInput, setApiKeyInput] = useState(getOpenAIApiKey());
   const [keySaved, setKeySaved] = useState(false);
@@ -109,6 +110,24 @@ export const ProfileScreen: React.FC<Props> = ({ lang, onLanguageChange, onOpenA
           ))}
         </div>
       </div>
+
+      {/* Switch Role Card */}
+      {onSwitchRole && (
+        <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card">
+          <h3 className="font-serif font-bold text-xs text-ink uppercase tracking-wider mb-2">
+            Rolni o'zgartirish:
+          </h3>
+          <button
+            onClick={() => {
+              triggerHaptic('medium');
+              onSwitchRole();
+            }}
+            className="w-full min-h-[44px] bg-[#0A1714] hover:bg-black text-gold-highlight font-bold text-xs rounded-xl border border-gold-highlight/50 flex items-center justify-center gap-2 active:scale-95 transition-all shadow-xs"
+          >
+            <span>{t.roleSelection.switchRoleBtn} (Bosh sahifaga qaytish)</span>
+          </button>
+        </div>
+      )}
 
       {/* OpenAI AI Integration Card */}
       <div className="bg-cream-card rounded-card p-3.5 border border-[#E3D9C4] shadow-card space-y-2.5">

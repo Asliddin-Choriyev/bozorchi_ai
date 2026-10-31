@@ -1,6 +1,8 @@
 export type Language = 'uz' | 'ru' | 'en';
 
-export type ScreenType = 
+export type UserRole = 'unselected' | 'shop_owner' | 'supplier';
+
+export type ShopOwnerScreenType = 
   | 'price_board'
   | 'product_detail'
   | 'supplier_compare'
@@ -9,6 +11,17 @@ export type ScreenType =
   | 'delivery_scan'
   | 'savings_result'
   | 'profile';
+
+export type SupplierScreenType =
+  | 'dashboard'
+  | 'prices'
+  | 'orders'
+  | 'order_detail'
+  | 'flash_discount'
+  | 'supplier_result'
+  | 'profile';
+
+export type ScreenType = ShopOwnerScreenType;
 
 export type Market = "O'rikzor" | "Food City" | "Chorsu" | "All";
 
@@ -104,4 +117,70 @@ export interface CartItem {
   pooledPrice: number;
   oldTotal: number;
   pooledTotal: number;
+}
+
+export type OrderStepStatus = 
+  | 'open'
+  | 'pool_bought'
+  | 'escrow_verified'
+  | 'truck_departed'
+  | 'delivered'
+  | 'payout_released';
+
+export interface PoolOrder {
+  id: string;
+  poolName: string;
+  cluster: string;
+  shopCount: number;
+  itemsSummary: string;
+  itemsDetail: {
+    name: string;
+    qty: string;
+    unitPrice: number;
+    totalPrice: number;
+  }[];
+  totalAmount: number; // 13,890,000 UZS
+  platformFeeRate: number; // 1.2%
+  platformFeeAmount: number; // 166,680 UZS
+  payoutAmount: number; // 13,723,320 UZS
+  routeDescription: string; // '1 Labo • 1.5 km yo'nalish (Chilonzor 9-12 dan 9-31 gacha)'
+  status: OrderStepStatus;
+  laboPlate: string;
+  driverName: string;
+  createdAt: string;
+  escrowVerifiedAt?: string;
+  departedAt?: string;
+  deliveredAt?: string;
+  payoutReleasedAt?: string;
+}
+
+export interface FlashDeal {
+  id: string;
+  productId: string;
+  productName: string;
+  volumeTons: number;
+  originalPrice: number;
+  flashPrice: number;
+  discountPercent: number;
+  targetDistricts: string[];
+  durationHours: number;
+  minutesRemaining: number;
+  buyersReachedCount: number;
+  isActive: boolean;
+}
+
+export interface ShopOwnerProfile {
+  name: string;
+  shopName: string;
+  district: string;
+  phone: string;
+}
+
+export interface SupplierProfile {
+  name: string;
+  companyName: string;
+  marketLocation: string;
+  phone: string;
+  verified: boolean;
+  rating: number;
 }

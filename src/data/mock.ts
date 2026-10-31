@@ -175,16 +175,17 @@ export const MOCK_SUPPLIERS: Supplier[] = [
   },
   {
     id: 'sup-2',
-    name: "O'rikzor Baraka Opt",
-    market: "O'rikzor ulgurji bozori",
+    name: "Elyor Baraka Optom (Elyor Aka)",
+    market: "O'rikzor bozori, 4-blok",
     pricePerUnit: 11950,
     verified: true,
-    rating: 4.7,
+    rating: 4.9,
     reviewCount: 98,
     minOrderQty: 200,
     unit: 'kg',
     deliveryTime: 'Ertaga 10:00 gacha',
-    phone: '+998 93 987 65 43'
+    badge: 'Demo Ta\'minotchi',
+    phone: '+998 93 555 12 88'
   },
   {
     id: 'sup-3',
@@ -367,3 +368,62 @@ export const MOCK_USER_PROFILE = {
   bozorCoins: 12500,
   verifiedStatus: 'Do\'kon tasdiqlangan (STIR 308941203)'
 };
+
+export const DEMO_SHOP_PROFILE = {
+  name: 'Dilshod Rustamov',
+  shopName: 'Dilshod Baqqollik',
+  district: 'Chilonzor 9-mavze',
+  phone: '+998 90 980 12 34'
+};
+
+export const DEMO_SUPPLIER_PROFILE = {
+  name: 'Elyor Aka',
+  companyName: 'Elyor Baraka Optom',
+  marketLocation: "O'rikzor bozori, 4-blok, 12-ombor",
+  phone: '+998 93 555 12 88',
+  verified: true,
+  rating: 4.9
+};
+
+export const INITIAL_POOL_ORDER = {
+  id: 'ord-chilonzor-902',
+  poolName: 'Chilonzor-9 Birgalikda Xarid',
+  cluster: 'Chilonzor 9-mavze klasteri (5 do\'kon)',
+  shopCount: 5,
+  itemsSummary: 'Shakar 500 kg + Un 15 qop + Yog\' 60 dona',
+  itemsDetail: [
+    { name: 'Shakar oq (Rossiya)', qty: '500 kg', unitPrice: 11400, totalPrice: 5700000 },
+    { name: 'Un 1-nav (Qozoq 50 kg)', qty: '15 qop', unitPrice: 255000, totalPrice: 3825000 },
+    { name: "Pista yog'i (5L)", qty: '60 dona', unitPrice: 71500, totalPrice: 4290000 },
+    { name: 'Umumiy Labo yetkazib berish ulushi', qty: '5 do\'kon', unitPrice: 75000, totalPrice: 75000 }
+  ],
+  totalAmount: 13890000,
+  platformFeeRate: 0.012, // 1.2%
+  platformFeeAmount: 166680,
+  payoutAmount: 13723320,
+  routeDescription: '1 Labo • 1.5 km yo\'nalish (Chilonzor 9-12 dan 9-31 gacha)',
+  status: 'escrow_verified' as const,
+  laboPlate: '01 723 A',
+  driverName: 'Sanjarbek',
+  createdAt: 'Bugun 10:20',
+  escrowVerifiedAt: 'Bugun 10:25',
+  departedAt: undefined as string | undefined,
+  deliveredAt: undefined as string | undefined,
+  payoutReleasedAt: undefined as string | undefined
+};
+
+export const INITIAL_FLASH_DEAL = {
+  id: 'flash-sugar-25t',
+  productId: 'sugar',
+  productName: 'Shakar (Rossiya/Xorazm)',
+  volumeTons: 25,
+  originalPrice: 12800,
+  flashPrice: 11400,
+  discountPercent: 11,
+  targetDistricts: ['Chilonzor', 'Uchtepa', 'Yunusobod'],
+  durationHours: 2,
+  minutesRemaining: 119,
+  buyersReachedCount: 48,
+  isActive: true
+};
+

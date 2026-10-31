@@ -1,44 +1,75 @@
 import React, { useState } from 'react';
-import { ScreenType, Language } from '../types';
+import { UserRole, ShopOwnerScreenType, SupplierScreenType, Language } from '../types';
 import { translations } from '../i18n';
 import { Zap, ChevronRight, RotateCcw, X, Play, CheckCircle2 } from 'lucide-react';
 import { triggerHaptic } from '../utils/telegram';
 
 interface Props {
-  currentScreen: ScreenType;
-  onNavigate: (screen: ScreenType) => void;
+  activeRole: UserRole;
+  currentShopScreen: ShopOwnerScreenType;
+  currentSupplierScreen: SupplierScreenType;
+  onNavigateShop: (screen: ShopOwnerScreenType) => void;
+  onNavigateSupplier: (screen: SupplierScreenType) => void;
   lang: Language;
   onAutofillSearch?: (query: string) => void;
   onTriggerDeliveryScan?: () => void;
+  onDispatchTruck?: () => void;
 }
 
 export const DemoBanner: React.FC<Props> = ({
-  currentScreen,
-  onNavigate,
+  activeRole,
+  currentShopScreen,
+  currentSupplierScreen,
+  onNavigateShop,
+  onNavigateSupplier,
   lang,
   onAutofillSearch,
-  onTriggerDeliveryScan
+  onTriggerDeliveryScan,
+  onDispatchTruck
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const t = translations[lang];
 
+  if (activeRole === 'unselected') return null;
+
+  const isSupplier = activeRole === 'supplier';
+
   // Map screens to flow step index
   const getStepIndex = (): number => {
-    switch (currentScreen) {
-      case 'price_board':
-        return 0;
-      case 'product_detail':
-        return 1;
-      case 'supplier_compare':
-        return 2;
-      case 'group_order':
-        return 3;
-      case 'delivery_scan':
-        return 4;
-      case 'savings_result':
-        return 5;
-      default:
-        return 0;
+    if (isSupplier) {
+      switch (currentSupplierScreen) {
+        case 'dashboard':
+          return 0;
+        case 'prices':
+          return 1;
+        case 'flash_discount':
+          return 2;
+        case 'orders':
+          return 3;
+        case 'order_detail':
+          return 4;
+        case 'supplier_result':
+          return 5;
+        default:
+          return 0;
+      }
+    } else {
+      switch (currentShopScreen) {
+        case 'price_board':
+          return 0;
+        case 'product_detail':
+          return 1;
+        case 'supplier_compare':
+          return 2;
+        case 'group_order':
+          return 3;
+        case 'delivery_scan':
+          return 4;
+        case 'savings_result':
+          return 5;
+        default:
+          return 0;
+      }
     }
   };
 
@@ -46,45 +77,92 @@ export const DemoBanner: React.FC<Props> = ({
 
   const handleNextStep = () => {
     triggerHaptic('medium');
-    switch (stepIdx) {
-      case 0:
-        // From Price Board -> Search sugar & open product detail
-        if (onAutofillSearch) onAutofillSearch('shakar 500 kg');
-        setTimeout(() => {
-          onNavigate('product_detail');
-        }, 150);
-        break;
-      case 1:
-        // From Product Detail -> Compare 5 Suppliers
-        onNavigate('supplier_compare');
-        break;
-      case 2:
-        // From Supplier Compare -> Join Chilonzor-9 Group Pool
-        onNavigate('group_order');
-        break;
-      case 3:
-        // From Group Order -> Pay to Escrow & open Delivery Screen
-        onNavigate('delivery_scan');
-        break;
-      case 4:
-        // From Delivery Scan -> Trigger invoice scan match & go to Savings
-        if (onTriggerDeliveryScan) onTriggerDeliveryScan();
-        setTimeout(() => {
-          onNavigate('savings_result');
-        }, 500);
-        break;
-      case 5:
-        // Reset to beginning
-        onNavigate('price_board');
-        break;
+    if (isSupplier) {
+      switch (stepIdx) {
+        case 0:
+          // Dashboard -> Prices
+          onNavigateSupplier('prices');
+          break;
+        case 1:
+          // Prices -> Flash Discount
+          onNavigateSupplier('flash_discount');
+          break;
+        case 2:
+          // Flash Discount -> Orders
+          onNavigateSupplier('orders');
+          break;
+        case 3:
+          // Orders -> Order Detail
+          onNavigateSupplier('order_detail');
+          break;
+        case 4:
+          // Order Detail -> Dispatch Truck -> Result
+          if (onDispatchTruck) onDispatchTruck();
+          setTimeout(() => {
+            onNavigateSupplier('supplier_result');
+          }, 400);
+          break;
+        case 5:
+          // Reset
+          onNavigateSupplier('dashboard');
+          break;
+      }
+    } else {
+      switch (stepIdx) {
+        case 0:
+          // From Price Board -> Search sugar & open product detail
+          if (onAutofillSearch) onAutofillSearch('shakar 500 kg');
+          setTimeout(() => {
+            onNavigateShop('product_detail');
+          }, 150);
+          break;
+        case 1:
+          // From Product Detail -> Compare 5 Suppliers
+          onNavigateShop('supplier_compare');
+          break;
+        case 2:
+          // From Supplier Compare -> Join Chilonzor-9 Group Pool
+          onNavigateShop('group_order');
+          break;
+        case 3:
+          // From Group Order -> Pay to Escrow & open Delivery Screen
+          onNavigateShop('delivery_scan');
+          break;
+        case 4:
+          // From Delivery Scan -> Trigger invoice scan match & go to Savings
+          if (onTriggerDeliveryScan) onTriggerDeliveryScan();
+          setTimeout(() => {
+            onNavigateShop('savings_result');
+          }, 500);
+          break;
+        case 5:
+          // Reset to beginning
+          onNavigateShop('price_board');
+          break;
+      }
     }
   };
 
   const handleReset = () => {
     triggerHaptic('light');
-    if (onAutofillSearch) onAutofillSearch('');
-    onNavigate('price_board');
+    if (isSupplier) {
+      onNavigateSupplier('dashboard');
+    } else {
+      if (onAutofillSearch) onAutofillSearch('');
+      onNavigateShop('price_board');
+    }
   };
+
+  const stepNames = isSupplier
+    ? t.demo.supplierStepNames || [
+        '1. Ta\'minotchi Dashbodi',
+        '2. Prays-list yangilash',
+        '3. Flash chegirma (25t)',
+        '4. Eskroudagi buyurtma',
+        '5. Mashina jo\'natish',
+        '6. 25t sotildi & Payout'
+      ]
+    : t.demo.stepNames;
 
   if (!isExpanded) {
     return (
@@ -112,7 +190,7 @@ export const DemoBanner: React.FC<Props> = ({
               ⚡
             </span>
             <span className="text-[11px] font-bold tracking-wide text-gold-highlight">
-              60s Killer Flow Demo
+              {isSupplier ? 'Ta\'minotchi Demo (60s)' : 'Baqqol Demo (60s)'}
             </span>
           </div>
 
@@ -150,7 +228,7 @@ export const DemoBanner: React.FC<Props> = ({
         <div className="flex items-center justify-between gap-2">
           <div className="text-[11px] font-medium leading-tight truncate">
             <span className="text-white/60 mr-1">Qadam {stepIdx + 1}/6:</span>
-            <span className="text-white font-bold">{t.demo.stepNames[stepIdx]}</span>
+            <span className="text-white font-bold">{stepNames[stepIdx]}</span>
           </div>
 
           <button
